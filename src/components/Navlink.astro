@@ -1,5 +1,5 @@
 ---
-const {link} = Astro.props;
-
+const {title} = Astro.props;
+const link = title === "home" ? "" : title;
 ---
-<li><a href={ `/${link}`}>{link}</a></li>
+<li><a href={ `/${link}`}>{title}</a></li>

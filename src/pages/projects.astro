@@ -1,6 +1,5 @@
 ---
-import Navigation from '../components/Navigation.astro';
-import Footer from "../components/Footer.astro";
+import Layout from '../components/Layout.astro';
 
 import '../styles/global.css';
 
@@ -8,16 +7,7 @@ const pageTitle = "Projects";
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{pageTitle}</title>
-	</head>
-	<body>
-        <Navigation />
-
+    <Layout {pageTitle}>
 		<h1>{pageTitle}</h1>
         <p>Wow, so many projects :)</p>
         <ul>
@@ -25,7 +15,5 @@ const pageTitle = "Projects";
             <li><a href="/projects/project-2/">Project 2</a></li>
 
         </ul>
-	</body>
-
-    <Footer />
+    </Layout>
 </html>
