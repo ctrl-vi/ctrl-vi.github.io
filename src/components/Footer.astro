@@ -1,11 +1,27 @@
 ---
 import Social from "./Social.astro";
+import "./Footer.css";
+
+const year = new Date().getFullYear();
 ---
 
-<style>
-</style>
-
 <footer>
-    <Social platform="github" username="ctrl-vi" />
-    <Social platform="linkedin" username="in/violet-monserate" />
+  <div class="info">
+    <p>© {year} Violet Monserate. All rights reserved.</p>
+    <p>Developed using <a href="https://astro.build/">Astro.</a></p>
+    <p>
+      <a href="https://github.com/ctrl-vi/ctrl-vi.github.io/issues"
+        >Report Bugs</a>
+    </p>
+  </div>
+    
+  <div class="socials">
+    <Social image="/images/github.svg" link="https://github.com/ctrl-vi" />
+    <Social
+      image="/images/linkedin.svg"
+      link="https://www.linkedin.com/in/violet-monserate/"
+    />
+    <Social image="/images/phone.svg" link="tel:425-970-5779" />
+    <Social image="/images/mail.svg" link="mailto:violetmonserate@gmail.com" />
+  </div>
 </footer>
