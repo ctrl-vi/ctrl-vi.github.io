@@ -1,5 +1,47 @@
 ---
+import Navigation from '../components/Navigation.astro';
+import Footer from "../components/Footer.astro";
 
+import '../styles/global.css';
+
+const pageTitle = "About Me";
+
+const identity = {
+    name: "Violet Monserate",
+    country: "USA",
+    state: "Washington",
+    city: "Seattle",
+    pronouns: "any/all",
+    age: 20,
+    occupation: "Computer Engineering and Philosophy: Ethics student",
+    hobbies: [
+        "bird watching",
+        "cooking",
+        "baking",
+        "board games",
+        "video games",
+        "programming"
+    ]
+};
+
+const skills = [
+    "Java",
+    "Python",
+    "C/C++",
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Astro",
+    "Google Suite"
+];
+
+const happy = false;
+const finished = false;
+var goal = 2;
+
+const bulletColor = "green";
 ---
 
 <html lang="en">
@@ -8,16 +50,37 @@
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="viewport" content="width=device-width" />
         <meta name="generator" content={Astro.generator} />
-        <title>Astro</title>
+		<title>{pageTitle}</title>
     </head>
     <body>
-        <a href="/">Home</a>
-        <a href="/about/">About</a>
-        <a href="/projects/">Projects</a>
+        <Navigation />
 
-        <h1>About Me</h1>
-        <h2>Schooling</h2>
+        <h1>{pageTitle}</h1>
 
-        <p>I am a student at University of Washington for Computer Engineering and Philosophy: Ethics--that's right, I'm getting a <strong>dual degree!</strong></p>
+        <p>Here's a little bit about me: </p>
+        <ul>
+            <li>My name is {identity.name}</li>
+            <li>My pronouns are ({identity.pronouns})</li>
+            <li>I live in {identity.city}, {identity.state}, {identity.country}</li>
+            <li>I am {identity.age} years old</li>
+            <li>I am a {identity.occupation}</li>
+            <li>My hobbies include:</li>
+            <ul>
+                {identity.hobbies.map(hobby => (
+                    <li class="bullet">{hobby}</li>
+                ))}
+            </ul>
+            <li>My skills include:</li>
+            <ul>
+                {skills.map(skill => (
+                    <li class="bullet">{skill}</li>
+                ))}
+        </ul>
+        {happy ? <p>I'm happy!</p> : <p>I'm sad :(</p>}
+
+        {finished && <p>I finished this tutorial!</p>}
+
+        {goal === 3 ? <p>My goal is to finish this in 3 days.</p> : <p>My goal finish time is <strong> NOT</strong> 3 days.</p>}
+        <Footer />
     </body>
 </html>
