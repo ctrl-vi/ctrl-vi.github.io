@@ -1,35 +1,39 @@
 ---
-import Header from './Header.astro';
-import Footer from './Footer.astro';
-import Navigation from './Navigation.astro';
-import './Layout.css';
+import Header from "./Header.astro";
+import Footer from "./Footer.astro";
+import Navigation from "./Navigation.astro";
+import "./Layout.css";
 
-const {pageTitle} = Astro.props; 
+const { pageTitle } = Astro.props;
 ---
-<style>
 
+<html lang="en">
+    <style>
+        .content {
+            flex: 1 0 auto;
+        }
+    </style>
 
-.content {
-    flex: 1 0 auto;
-    
-}
-</style>
-<head>
     <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
-</head>
-<body>
-    <Header />
-    <Navigation />
-    <div class="content">
-        <slot /> <!-- This is where the page-specific content will go -->
-    </div>
-    <Footer class="footer"/>
-</body>
+
+    <body>
+        <Header />
+        <Navigation />
+        <div class="content">
+            <slot />
+            <!-- This is where the page-specific content will go -->
+        </div>
+        <Footer class="footer" />
+    </body>
+</html>

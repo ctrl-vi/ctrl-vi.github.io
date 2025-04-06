@@ -1,19 +1,23 @@
 ---
-import Layout from '../components/Layout.astro';
+import Layout from "../components/Layout.astro";
+import "../styles/global.css";
 
-import '../styles/global.css';
-
+const allProjects = Object.values(
+    import.meta.glob("./projects/*.md", { eager: true }),
+);
 const pageTitle = "Projects";
 ---
 
-<html lang="en">
-    <Layout {pageTitle}>
-		<h1>{pageTitle}</h1>
-        <p>Wow, so many projects :)</p>
-        <ul>
-            <li><a href="/projects/project-1/">Project 1</a></li>
-            <li><a href="/projects/project-2/">Project 2</a></li>
-
-        </ul>
-    </Layout>
-</html>
+<Layout {pageTitle}>
+    <h1>{pageTitle}</h1>
+    <p>Wow, so many projects :)</p>
+    <ul>
+        {
+            allProjects.map((post: any) => (
+                <li>
+                    <a href={post.url}>{post.frontmatter.title}</a>
+                </li>
+            ))
+        }
+    </ul>
+</Layout>

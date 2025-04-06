@@ -1,0 +1,19 @@
+.link {
+    float: left;
+
+}
+
+.link a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    height: 100%;
+    line-height: 1em;
+}
+
+.link a:hover,
+.dropdown:hover {
+    background-color: #b236ff;
+}

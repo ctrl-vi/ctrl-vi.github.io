@@ -1,6 +1,9 @@
 ---
-const {title, link} = Astro.props;
+import "./Navlink.css";
+
+const { title, link } = Astro.props;
 ---
-<li>
-    <a href={link}>{title}</a>
+
+<li class="link">
+        <a href={link}>{title}</a>
 </li>

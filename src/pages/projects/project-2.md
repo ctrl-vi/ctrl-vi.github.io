@@ -1,5 +1,6 @@
 ---
-title: My Second Blog Post
+layout: ../../components/MarkdownProjectLayout.astro
+title: Project 2
 author: Astro Learner
 description: "After learning some Astro, I couldn't stop!"
 image:

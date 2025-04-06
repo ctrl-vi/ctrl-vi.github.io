@@ -5,27 +5,8 @@ nav {
 nav > ul {
     list-style-type: none;
     margin: 0;
-    padding-left: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
     overflow: visible;
     background-color: #7213ad;
-  }
-
-nav > ul > li {
-    float: left;
-  }
-  
-  nav > ul > li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
-
-  nav > ul > li > a, nav > ul > li > div > a {
-    color: white;
-  }
-  
-  nav > ul > li a:hover {
-    background-color: #b236ff;
-  }
+}
