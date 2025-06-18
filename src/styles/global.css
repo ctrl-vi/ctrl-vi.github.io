@@ -3,11 +3,13 @@ html {
     font-family: sans-serif;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
-    overflow-x: hidden; /* Prevent horizontal scrolling */
+    overflow-x: hidden;
+    /* Prevent horizontal scrolling */
 }
 
 body {
@@ -16,6 +18,38 @@ body {
     min-height: 100%;
 }
 
+hr {
+    border: 1px solid lightgray;
+}
+
 footer {
     flex-shrink: 0;
+}
+
+.card-container {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    display: grid;
+    align-self: center;
+    justify-content: center;
+    width: 100%;
+    gap: 2em;
+}
+
+@media screen and (max-width: 1500px) {
+    .card-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .card-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+
 }

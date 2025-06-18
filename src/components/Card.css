@@ -1,0 +1,28 @@
+.card {
+    box-shadow: 0 0.5em 1em 0 rgba(0,0,0,0.2);
+    transition: 0.15s;
+    height: 100%;
+}
+
+a {
+      text-decoration: none;
+      color: inherit;
+ }
+
+.card:hover {
+    box-shadow: 0 1em 2em 0 rgba(0,0,0,0.2);
+}
+
+.card > h2 {
+    text-align: center;
+}
+
+.card > .card-text {
+    margin: 1em;
+    text-align: center;
+}
+
+.card > .card-date {
+    text-align: center;
+    color: grey;
+}

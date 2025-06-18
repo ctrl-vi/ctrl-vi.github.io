@@ -1,0 +1,24 @@
+---
+import "./Card.css";
+
+function formatDate(date : string) {
+    if (date == null || date === "current") {
+        return "current";
+    }
+    const dateObject = new Date(date);
+    return (dateObject.getUTCMonth() + 1) + "/" + dateObject.getUTCFullYear();
+}
+
+const {title, image, description, link, startDate, finishDate} = Astro.props;
+
+const dateString = formatDate(startDate) + " - " + formatDate(finishDate); 
+---
+
+<a href={link} class="card-link">
+<div class="card">
+    <img style="width:100%" src={image.src}, alt={image.alt} />
+    <h2 class="card-header"><b>{title}</b></h2>
+    <p class ="card-date">{dateString}</p>
+    <p class="card-text">{description}</p>
+</div>
+</a>

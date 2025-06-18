@@ -1,14 +1,26 @@
 ---
 import Layout from "./Layout.astro";
+import "./MarkdownProjectLayout.css";
+
+
+function formatDate(date : string) {
+    if (date == null || date === "current") {
+        return "current";
+    }
+    const dateObject = new Date(date);
+    return (dateObject.getUTCMonth() + 1) + "/" + dateObject.getUTCFullYear();
+}
 
 const { frontmatter } = Astro.props;
+const startDate = formatDate(frontmatter.startDate);
+const finishDate = formatDate(frontmatter.finishDate); 
 ---
 <Layout pageTitle={frontmatter.title}>
 <h1>{frontmatter.title}</h1>
-<p>{frontmatter.pubDate.toString().slice(0,10)}</p>
+<p class="date">{startDate} - {finishDate}</p>
 <p><em>{frontmatter.description}</em></p>
-<p>Written by: {frontmatter.author}</p>
-<img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
+<img src={frontmatter.image.src} width="300" alt={frontmatter.image.alt} />
+<hr />
 <slot />
 
 </Layout>

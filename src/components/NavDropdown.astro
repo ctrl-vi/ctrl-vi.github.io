@@ -2,13 +2,12 @@
 import "./NavDropdown.css";
 import "./Navlink.css";
 
-const { title, link } = Astro.props;
-
+const { title, link, isNewTab } = Astro.props;
 ---
 
 <li class="link">
     <div class="dropdown">
-        <a href={link}>{title} ▾</a>
+        <a href={link} target={isNewTab && "_blank"}>{title} ▾</a>
         <div class="dropdown-content">
             <slot />
         </div>

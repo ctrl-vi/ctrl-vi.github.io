@@ -1,15 +1,37 @@
 ---
+import type { MarkdownInstance } from "astro";
 import Navlink from "./Navlink.astro";
 import NavDropdown from "./NavDropdown.astro";
 import "./Navigation.css";
+
+interface Frontmatter {
+    title: string;
+    image: string;
+    description: string;
+    startDate: Date;
+}
+const matches = 
+    import.meta.glob<MarkdownInstance<Frontmatter>>("../pages/projects/*.md", { eager: true });
+const allProjects = Object.values(matches).sort((a, b) => {
+    return new Date(b.frontmatter.startDate).getTime() - new Date(a.frontmatter.startDate).getTime();
+});
+const size = allProjects.length;
 ---
 
 <nav><ul>
     <Navlink title="Home" link="/"/>
     <Navlink title="About" link="/about"/>
-    <Navlink title="Projects" link="/projects"/>
-    <Navlink title="Resume" link="/resume"/>
-    <Navlink title="Blog" link="/blog"/>
+    <NavDropdown title="Projects" link="/projects">
+        {allProjects.map((project) => (
+            <a href={project.url}>
+                {project.frontmatter.title}
+            </a>
+        ))}
+    </NavDropdown>
+    <NavDropdown title="Resume" link="../../Monserate Resume.pdf" isNewTab={true}>
+        <a href="../../Monserate Resume.docx" target="_blank">Download Word</a>
+        <a href ="../../Monserate Resume.pdf" target="_blank">Download PDF</a>
+    </NavDropdown>
     <NavDropdown title="Contact" link="/contact">
         <a href="mailto:violetmonserate@gmail.com">Email</a>
         <a href="tel:425-970-5779">Phone</a>
