@@ -1,7 +1,7 @@
 ---
 layout: ../../components/MarkdownProjectLayout.astro
 title: Personal Website
-description: You're using it at this very moment! Wanted a landing page to hold onto my projects, contact info, and more, so here we are. 
+description: A landing page to hold onto my projects, contact info, and more. 
 image:
     src: https://docs.astro.build/assets/rose.webp
     alt: 'The Astro logo on a dark background with a pink glow.'

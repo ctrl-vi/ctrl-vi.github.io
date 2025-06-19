@@ -4,7 +4,9 @@ import Footer from "./Footer.astro";
 import Navigation from "./Navigation.astro";
 import "./Layout.css";
 
+
 const { pageTitle } = Astro.props;
+const { url, site } = Astro;
 ---
 
 <html lang="en">
@@ -19,8 +21,8 @@ const { pageTitle } = Astro.props;
         <!-- Meta tags for previews -->
         <meta property="og:title" content={pageTitle} />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.url.href} />
-        <meta property="og:image" content="../../favicon.svg" />
+        <meta property="og:url" content={url} />
+        <meta property="og:description" content="A personal website for Violet Monserate" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
