@@ -15,7 +15,7 @@ const { frontmatter } = Astro.props;
 const startDate = formatDate(frontmatter.startDate);
 const finishDate = formatDate(frontmatter.finishDate); 
 ---
-<Layout pageTitle={frontmatter.title}>
+<Layout pageTitle={frontmatter.title} ogType="article" article={frontmatter.article} description={frontmatter.description}>
 <h1>{frontmatter.title}</h1>
 <p class="date">{startDate} - {finishDate}</p>
 <p><em>{frontmatter.description}</em></p>
