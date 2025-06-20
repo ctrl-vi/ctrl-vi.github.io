@@ -18,9 +18,13 @@ const allProjects = Object.values(matches).sort((a, b) => {
     return new Date(b.frontmatter.startDate).getTime() - new Date(a.frontmatter.startDate).getTime();
 });
 const pageTitle = "Projects";
+const ogType = "website";
+const ogDescription  = "See the progression of Violet Monserate's projects, spanning both hardware and software";
+const seoDescription = "See Violet Monserate's full-stack and hardware projects using advanced topics in Java, C++, Inventor, Verilog, Github, Javascript, React, Astro";
+
 ---
 
-<Layout {pageTitle}>
+<Layout {pageTitle} {ogType} {ogDescription} {seoDescription}>
     <h1>{pageTitle}</h1>
     <div class = "card-container">
         {allProjects.map((project) => (

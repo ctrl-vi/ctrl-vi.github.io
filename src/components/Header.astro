@@ -1,4 +1,6 @@
 ---
+import { Image } from "astro:assets";
+import personalLogo from "../assets/logo.svg";
 
 ---
 
@@ -16,10 +18,11 @@
     }
     img {
         width: 5em;
+        height: 5em;
         background-color: #7213ad;
     }
 </style>
 <div class="header">
-    <a href="/"><img src="/favicon.svg" alt="Personal logo." /></a> 
+    <a href="/"><Image src={personalLogo} alt="Personal logo." /></a> 
 </div>
 <!-- TODO: WRITE PROPER ALT TEXT, REPLACE WITH PROPER HEADER -->

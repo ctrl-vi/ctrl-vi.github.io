@@ -7,7 +7,8 @@ article:
     tags: ["astro", "html", "js", "vite", "css" ]
 layout: ../../components/MarkdownProjectLayout.astro
 title: Personal Website
-description: Insight into the website design process to create this masterpiece 
+description: Crafting a fast, Multi-Page Application (MPA) in Astro to host personal information and publish projects
+ogDescription: Using Astro (HTML, JSX, Vite, CSS) for rich, fast, and efficient Multi-Page Application (MPA), crafting Astro components from scratch to streamline publishing.
 image:
     src: https://docs.astro.build/assets/rose.webp
     alt: 'The Astro logo on a dark background with a pink glow.'

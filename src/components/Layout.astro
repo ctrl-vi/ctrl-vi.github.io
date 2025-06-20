@@ -1,46 +1,53 @@
 ---
 import { SEO } from "astro-seo";
-import { getImagePath } from "astro-opengraph-images";
+import type { Meta } from "astro-seo";
 
+import { getImagePath } from "astro-opengraph-images";
 import Header from "./Header.astro";
 import Footer from "./Footer.astro";
 import Navigation from "./Navigation.astro";
 import "./Layout.css";
 
-const { pageTitle, ogType, article, description } = Astro.props;
+
+
+const { pageTitle, ogType, article, ogDescription, seoDescription } = Astro.props;
+const ogTypeSanitized = ogType || "website";
+const ogDescriptionSanitized = ogDescription || "A space for Violet Monserate's resume, contact, and projects";
+const seoDescriptionSanitized = seoDescription || "Violet Monserate's Personal Website - a landing page for my resume, contact information, and personal projects."
 const { url } = Astro;
+const fullTitle = `${pageTitle} | Violet Monserate`;
+const profile = ogType === "profile" ? [
+    {property: "profile:first_name", content: "Violet"},
+    {property: "profile:last_name", content: "Monserate"},
+    {property: "profile:username", content: "@ctrl.vi"},
+    {property: "profile:gender", content: "female"}
+] : []; 
 ---
 
 <html lang="en">
     <head>       
-         <style>
-            .content {
-                flex: 1 0 auto;
-            }
-        </style>
         <SEO
-            title={pageTitle}
-            titleTemplate="%s | Violet Monserate"
-            description={description || "Violet Monserate's Personal Website - a space for my resume, contact, and projects."}
+            title={fullTitle}
+            description={seoDescriptionSanitized}
             charset="UTF-8"
             openGraph={{
                 basic: {
-                    title: pageTitle,
-                    type: ogType || "website",
+                    title: fullTitle,
+                    type: ogTypeSanitized,
                     image: "https://ctrl-vi.github.io/images/og_image.png",
                     url: url,
                 },
-                article: article || {},
+                article: article,
                 optional: {
-                    description: description || "Violet Monserate's Personal Website",
-                    siteName: "Violet Monserate's Website",
+                    description: ogDescriptionSanitized,
+                    siteName: "Violet Monserate's Personal Website",
                 },
             }}
             twitter={{
                 card: "summary",
                 creator: "@VioletMonserate",
-                title: pageTitle + " | Violet Monserate",
-                description: description || "Violet Monserate's Personal Website - a space for my resume, contact, and projects.",
+                title: fullTitle,
+                description: ogDescriptionSanitized,
                 image: "https://ctrl-vi.github.io/images/og_image.png",
             }}
             extend={{
@@ -58,10 +65,10 @@ const { url } = Astro;
                 ],
                 meta: [
                     {name: "viewport", content: "width=device-width"},
-                    {name: "generator", content: Astro.generator}
+                    {name: "generator", content: Astro.generator},
+                    ...profile
                 ]
             }}
-
         />
     </head>
     <body>

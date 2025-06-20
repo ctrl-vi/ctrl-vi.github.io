@@ -1,6 +1,6 @@
 # Violet Monserate's Personal Website
 
-It's finally time for me to make a per  sonal website!
+It's finally time for me to make a personal website!
 
 This will primarily be a place to consolidate my contact information, class projects, and perhaps host my thoughts!
 

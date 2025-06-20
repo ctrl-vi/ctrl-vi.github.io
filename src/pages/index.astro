@@ -4,9 +4,12 @@ import Layout from '../components/Layout.astro';
 import '../styles/global.css';
 
 const pageTitle = "Home";
+const ogType = "website";
+const ogDescription  = "Take a peek at student and developer Violet Monserate, from her studies at UW to personal projects";
+const seoDescription = "Meet Violet Monserate: studying Computer Engineering, Philosophy: Ethics at University of Washington interested in education, robotics, and accessibility"
 ---
 
-<Layout {pageTitle}>
+<Layout {pageTitle} {ogType} {ogDescription} {seoDescription}>
 	<h1>{pageTitle}</h1>
 	<h2>Computer Engineering and Philosophy: Ethics Student</h2>
 	<p>Welcome to my brand new* website! This is a place where I will be posting my projects, blog posts, and other things I find interesting. </p>
