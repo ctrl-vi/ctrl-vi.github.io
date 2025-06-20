@@ -13,4 +13,5 @@ image:
     src: "https://docs.astro.build/assets/rays.webp"
     alt: "The Astro logo on a dark background with rainbow rays."
 startDate: '2023-01'
+tags: ["js", "vite", "react", "cesium", "resium"]
 ---
