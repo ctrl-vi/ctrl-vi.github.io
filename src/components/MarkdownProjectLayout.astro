@@ -13,14 +13,20 @@ function formatDate(date : string) {
 
 const { frontmatter } = Astro.props;
 const startDate = formatDate(frontmatter.startDate);
-const finishDate = formatDate(frontmatter.finishDate); 
+const finishDate = formatDate(frontmatter.finishDate);
+
+const authors: string[] = frontmatter.article.authors;
+const numAuthors = authors.length; 
+const authorString = numAuthors == 1 ? 
+    authors.toString() :
+    authors.slice(0, numAuthors - 1).join(", ") + (numAuthors == 2 ? "" : ",") + " and " + authors[numAuthors - 1]; 
 ---
-<Layout pageTitle={frontmatter.title} ogType="article" article={frontmatter.article} description={frontmatter.description}>
+<Layout class="layout" pageTitle={frontmatter.title} ogType="article" article={frontmatter.article} description={frontmatter.description}>
 <h1>{frontmatter.title}</h1>
 <p class="date">{startDate} - {finishDate}</p>
 <p><em>{frontmatter.description}</em></p>
-<img src={frontmatter.image.src} width="300" alt={frontmatter.image.alt} />
-<hr />
+<p>Written by: {authorString}</p>
+<div class="md-slot">
 <slot />
-
+</div>
 </Layout>

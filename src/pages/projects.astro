@@ -4,18 +4,11 @@ import Layout from "../components/Layout.astro";
 import Card from "../components/Card.astro";
 
 import "../styles/global.css";
+import { getCollection } from 'astro:content';
 
-interface Frontmatter {
-    title: string;
-    image: string;
-    description: string;
-    startDate: string;
-    finishDate: string;
-}
-const matches = 
-    import.meta.glob<MarkdownInstance<Frontmatter>>("./projects/*.md", { eager: true });
-const allProjects = Object.values(matches).sort((a, b) => {
-    return new Date(b.frontmatter.startDate).getTime() - new Date(a.frontmatter.startDate).getTime();
+const projects = await getCollection("projects");
+const sortedProjects = projects.sort((a, b) => {
+    return b.data.startDate.getTime() - a.data.startDate.getTime();
 });
 const pageTitle = "Projects";
 const ogType = "website";
@@ -27,14 +20,18 @@ const seoDescription = "See Violet Monserate's full-stack and hardware projects 
 <Layout {pageTitle} {ogType} {ogDescription} {seoDescription}>
     <h1>{pageTitle}</h1>
     <div class = "card-container">
-        {allProjects.map((project) => (
+        {sortedProjects.map((project) => (
                 <Card
-                    title={project.frontmatter.title}
-                    image={project.frontmatter.image}
-                    description={project.frontmatter.description}
-                    link={project.url}
-                    startDate={project.frontmatter.startDate}
-                    finishDate={project.frontmatter.finishDate}
+
+
+
+                    title={project.data.title}
+                    image={project.data.image.src}
+                    alt={project.data.image.alt}
+                    description={project.data.description}
+                    link={`/projects/${project.id}`}
+                    startDate={project.data.startDate}
+                    finishDate={project.data.finishDate}
 
                 />
         ))}

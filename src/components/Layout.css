@@ -20,6 +20,6 @@ body {
 
 main {
     flex: 1;
-    padding: 1em;
+    padding: 1em 2em 1em 2em;
     box-sizing: border-box;
 }

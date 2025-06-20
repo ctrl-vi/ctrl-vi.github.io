@@ -1,6 +1,11 @@
 ---
 import Social from "./Social.astro";
 import "./Footer.css";
+import github from "@assets/github.svg"
+import linkedin from "@assets/linkedin.svg"
+import phone from "@assets/phone.svg"
+import mail from "@assets/mail.svg"
+
 
 const year = new Date().getFullYear();
 ---
@@ -17,20 +22,20 @@ const year = new Date().getFullYear();
     
   <div class="socials">
     <Social 
-      image="/images/github.svg" 
+      image={github} 
       alt="Github logo links to Violet Monserate's personal Github"
       link="https://github.com/ctrl-vi" />
     <Social
-      image="/images/linkedin.svg"
+      image={linkedin}
       alt="LinkedIn logo links to Violet Monserate's LinkedIn"
       link="https://www.linkedin.com/in/violet-monserate/"
     />
     <Social 
-      image="/images/phone.svg" 
+      image={phone} 
       alt="Phone icon links to calling Violet Monserate's personal number"
       link="tel:425-970-5779" />
     <Social 
-      image="/images/mail.svg" 
+      image={mail} 
       alt="Mail icon links to sending Violet Monserate an email"
       link="mailto:violetmonserate@gmail.com" />
   </div>

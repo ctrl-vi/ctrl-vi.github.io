@@ -10,7 +10,7 @@ title: Phoenix Force Robotics
 description: "Numerous contributions to the competition robot, from kinematics to award-winning computer vision"
 seoDescription: "Violet Monserate's contributed to FRC (FIRST Robotics Competition) in Java, C++, Python, Inventor, winning Industrial Design Award for Computer Vision. "
 image:
-    src: https://docs.astro.build/assets/arc.webp
+    src: "@assets/arc.webp"
     alt: The Astro logo on a dark background with a purple gradient arc.
 startDate: 2019-09
 finishDate: 2023-06
