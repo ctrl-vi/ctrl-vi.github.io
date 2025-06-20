@@ -74,10 +74,10 @@ const profile = ogType === "profile" ? [
     <body>
         <Header />
         <Navigation />
-        <div class="content">
+        <main class="content">
             <slot />
             <!-- This is where the page-specific content will go -->
-        </div>
-        <Footer class="footer" />
+        </main>
+        <Footer />
     </body>
 </html>
