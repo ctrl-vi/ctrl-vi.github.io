@@ -21,7 +21,7 @@ const authorString = numAuthors == 1 ?
     authors.toString() :
     authors.slice(0, numAuthors - 1).join(", ") + (numAuthors == 2 ? "" : ",") + " and " + authors[numAuthors - 1]; 
 ---
-<Layout class="layout" pageTitle={frontmatter.title} ogType="article" article={frontmatter.article} description={frontmatter.description}>
+<Layout class="layout" pageTitle={frontmatter.title} ogType="article" article={frontmatter.article} ogDescription={frontmatter.description} seoDescription={frontmatter.seoDescription}>
 <h1>{frontmatter.title}</h1>
 <p class="date">{startDate} - {finishDate}</p>
 <p><em>{frontmatter.description}</em></p>

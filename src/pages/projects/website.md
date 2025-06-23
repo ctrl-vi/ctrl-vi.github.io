@@ -15,7 +15,7 @@ image:
 startDate: 2025-03
 tags: ["astro", "html", "js", "vite", "css" ]
 ---
-![../](@assets/astro.webp)
+![The Astro logo on a dark background with a pink glow.](@assets/astro.webp)
 
 ---
 
