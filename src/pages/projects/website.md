@@ -4,7 +4,7 @@ article:
     modifiedTime: "2025-06-19T02:07:41Z"
     authors: ["Violet Monserate"]
     section: Personal Projects
-    tags: ["astro", "html", "js", "vite", "css" ]
+    tags: ["astro", "html", "jsx", "vite", "css" ]
 layout: ../../components/MarkdownProjectLayout.astro
 title: Personal Website
 description: Crafting a fast, Multi-Page Application (MPA) in Astro to host personal information and publish projects
@@ -13,7 +13,7 @@ image:
     src: "@assets/astro.webp"
     alt: 'The Astro logo on a dark background with a pink glow.'
 startDate: 2025-03
-tags: ["astro", "html", "js", "vite", "css" ]
+icons: ["astro", "html", "css", "vite", "github" ]
 ---
 ![The Astro logo on a dark background with a pink glow.](@assets/astro.webp)
 

@@ -2,7 +2,6 @@
 import Layout from "./Layout.astro";
 import "./MarkdownProjectLayout.css";
 
-
 function formatDate(date : string) {
     if (date == null || date === "current") {
         return "current";
@@ -21,7 +20,7 @@ const authorString = numAuthors == 1 ?
     authors.toString() :
     authors.slice(0, numAuthors - 1).join(", ") + (numAuthors == 2 ? "" : ",") + " and " + authors[numAuthors - 1]; 
 ---
-<Layout class="layout" pageTitle={frontmatter.title} ogType="article" article={frontmatter.article} ogDescription={frontmatter.description} seoDescription={frontmatter.seoDescription}>
+<Layout pageTitle={frontmatter.title} ogType="article" article={frontmatter.article} ogDescription={frontmatter.description} seoDescription={frontmatter.seoDescription}>
 <h1>{frontmatter.title}</h1>
 <p class="date">{startDate} - {finishDate}</p>
 <p><em>{frontmatter.description}</em></p>

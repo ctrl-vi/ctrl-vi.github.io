@@ -17,6 +17,20 @@ a {
     width: 100%;
     height: auto;
 }
+
+.card > .card-icon-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 1em 1em;
+}
+
+.card > .card-icon-container > img {
+    width: auto;
+    height: 1.5em;
+}
 .card > h2 {
     text-align: center;
 }

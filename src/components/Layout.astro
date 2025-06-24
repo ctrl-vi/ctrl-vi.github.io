@@ -8,11 +8,22 @@ import Navigation from "./Navigation.astro";
 import "./Layout.css";
 
 
+interface Props {
+    pageTitle: string,
+    ogType: string,
+    article?: {
+      publishedTime?: string;
+      modifiedTime?: string;
+      expirationTime?: string;
+      authors?: string[];
+      section?: string;
+      tags?: string[];
+    },
+    ogDescription: string,
+    seoDescription: string
+}
 
 const { pageTitle, ogType, article, ogDescription, seoDescription } = Astro.props;
-const ogTypeSanitized = ogType || "website";
-const ogDescriptionSanitized = ogDescription || "A space for Violet Monserate's resume, contact, and projects";
-const seoDescriptionSanitized = seoDescription || "Violet Monserate's Personal Website - a landing page for my resume, contact information, and personal projects."
 const { url } = Astro;
 const fullTitle = `${pageTitle} | Violet Monserate`;
 const profile = ogType === "profile" ? [
@@ -27,18 +38,18 @@ const profile = ogType === "profile" ? [
     <head>       
         <SEO
             title={fullTitle}
-            description={seoDescriptionSanitized}
+            description={seoDescription}
             charset="UTF-8"
             openGraph={{
                 basic: {
                     title: fullTitle,
-                    type: ogTypeSanitized,
+                    type: ogType,
                     image: "https://ctrl-vi.github.io/images/og_image.png",
                     url: url,
                 },
                 article: article,
                 optional: {
-                    description: ogDescriptionSanitized,
+                    description: ogDescription,
                     siteName: "Violet Monserate's Personal Website",
                 },
             }}
@@ -46,7 +57,7 @@ const profile = ogType === "profile" ? [
                 card: "summary",
                 creator: "@VioletMonserate",
                 title: fullTitle,
-                description: ogDescriptionSanitized,
+                description: ogDescription,
                 image: "https://ctrl-vi.github.io/images/og_image.png",
             }}
             extend={{

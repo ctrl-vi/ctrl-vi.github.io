@@ -1,6 +1,10 @@
 import { glob } from "astro/loaders";
 import { defineCollection, z } from "astro:content";
 
+export type Icon = {
+    image: ImageMetadata,
+    alt: string
+}
 const projects = defineCollection({
     loader: glob({ pattern: "**/*.md", base: "./src/pages/projects" }),
     schema: ( {image} ) => z.object({
@@ -21,7 +25,7 @@ const projects = defineCollection({
         }),
         startDate: z.coerce.date(),
         finishDate: z.coerce.date().optional(),
-        tags: z.array(z.string())
+        icons: z.array(z.string())
     }),
 });
 

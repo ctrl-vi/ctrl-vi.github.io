@@ -1,26 +1,76 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+
+import astro from "@cardIcons/astro.png";
+import cesium from "@cardIcons/cesium.png";
+import cpp from "@cardIcons/cpp.png";
+import css from "@cardIcons/css.png";
+import github from "@cardIcons/github.svg";
+import html from "@cardIcons/html.png";
+import java from "@cardIcons/java.png";
+import js from "@cardIcons/js.png";
+import opencv from "@cardIcons/opencv.webp";
+import python from "@cardIcons/python.png";
+import react from "@cardIcons/react.png";
+import vite from "@cardIcons/vite.png";
+import wpilib from "@cardIcons/wpilib.png";
+
+import blank from "@cardIcons/blank.jpg";
 import "./Card.css";
 
-function formatDate(date : string) {
-    if (date == null || date === "current") {
-        return "current";
-    }
-    const dateObject = new Date(date);
-    return (dateObject.getUTCMonth() + 1) + "/" + dateObject.getUTCFullYear();
+interface Props {
+    link: string;
+    title: string;
+    startDate: Date;
+    finishDate?: Date;
+    image: ImageMetadata;
+    alt: string;
+    description: string;
+    icons: string[];
 }
 
-const { link, title, startDate, finishDate, image, alt, description } = Astro.props;
+const { link, title, startDate, finishDate, image, alt, description, icons } =
+    Astro.props;
 
-const dateString = formatDate(startDate) + " - " + formatDate(finishDate); 
+const kvArray: [string, ImageMetadata][] = [
+    ["astro", astro],
+    ["cesium", cesium],
+    ["cpp", cpp],
+    ["c++", cpp],
+    ["css", css],
+    ["github", github],
+    ["html", html],
+    ["java", java],
+    ["js", js],
+    ["jsx", js],
+    ["opencv", opencv],
+    ["python", python],
+    ["react", react],
+    ["vite", vite],
+    ["wpilib", wpilib]
+];
+const iconMap = new Map<string, ImageMetadata>(kvArray);
+
+function formatDate(date?: Date) {
+    if (date == null) {
+        return "current";
+    }
+    return date.getUTCMonth() + 1 + "/" + date.getUTCFullYear();
+}
+
+const dateString = formatDate(startDate) + " - " + formatDate(finishDate);
 ---
 
 <a href={link} class="card-link">
-<div class="card">
-    <Image class="card-image" src={image} alt={alt} loading="eager"/>
-    <h2 class="card-header"><b>{title}</b></h2>
-    <p class ="card-date">{dateString}</p>
-    <p class="card-text">{description}</p>
-</div>
+    <div class="card">
+        <Image class="card-image" src={image} alt={alt} loading="eager" />
+        <h2 class="card-header"><b>{title}</b></h2>
+        <p class="card-date">{dateString}</p>
+
+        <div class="card-icon-container">
+            {icons.map((icon: string) => <Image src={iconMap.get(icon) ?? blank} alt={icon} loading="lazy" />)}
+        </div>
+        <p class="card-text">{description}</p>
+    </div>
 </a>

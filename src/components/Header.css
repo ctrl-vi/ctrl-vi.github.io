@@ -1,0 +1,16 @@
+    .header {
+        background-color: #7213ad;
+        padding-top: 1em;
+        padding-bottom: 0.5em;
+        width: 100%;
+        box-sizing: border-box;
+        height: auto;
+        box-shadow: 0em 2em 2em black;
+        display: flex;
+        justify-content: center;
+    }
+    .header img {
+        width: 5em;
+        height: 5em;
+        background-color: #7213ad;
+    }

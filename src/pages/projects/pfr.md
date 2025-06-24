@@ -4,7 +4,7 @@ article:
     modifiedTime: "2025-06-19T02:07:41Z"
     authors: ["Violet Monserate"]
     section: Personal Projects
-    tags: ["java", "c++", "python", "opencv", "inventor", "opensource"]
+    tags: ["java", "c++", "python", "opencv", "wpilib", "inventor", "opensource"]
 layout: ../../components/MarkdownProjectLayout.astro
 title: Phoenix Force Robotics
 description: "Numerous contributions to the competition robot, from kinematics to award-winning computer vision"
@@ -14,5 +14,6 @@ image:
     alt: The Astro logo on a dark background with a purple gradient arc.
 startDate: 2019-09
 finishDate: 2023-06
-tags: ["java", "c++", "python", "opencv"]
+icons: ["java", "cpp", "python", "opencv", "wpilib", "github"]
+
 ---

@@ -22,9 +22,6 @@ const seoDescription = "See Violet Monserate's full-stack and hardware projects 
     <div class = "card-container">
         {sortedProjects.map((project) => (
                 <Card
-
-
-
                     title={project.data.title}
                     image={project.data.image.src}
                     alt={project.data.image.alt}
@@ -32,7 +29,7 @@ const seoDescription = "See Violet Monserate's full-stack and hardware projects 
                     link={`/projects/${project.id}`}
                     startDate={project.data.startDate}
                     finishDate={project.data.finishDate}
-
+                    icons={project.data.icons}
                 />
         ))}
     </div>
