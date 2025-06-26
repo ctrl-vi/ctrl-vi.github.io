@@ -5,7 +5,7 @@ article:
     authors: ["Violet Monserate"]
     section: Personal Projects
     tags: ["java", "c++", "python", "opencv", "wpilib", "inventor", "opensource"]
-layout: ../../components/MarkdownProjectLayout.astro
+layout: '@components/MarkdownProjectLayout.astro'
 title: Phoenix Force Robotics
 description: "Numerous contributions to the competition robot, from kinematics to award-winning computer vision"
 seoDescription: "Violet Monserate's contributed to FRC (FIRST Robotics Competition) in Java, C++, Python, Inventor, winning Industrial Design Award for Computer Vision. "

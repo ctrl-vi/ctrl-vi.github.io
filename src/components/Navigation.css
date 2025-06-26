@@ -2,7 +2,7 @@ nav {
     background-color: #7213ad;
 }
 
-nav > ul {
+nav>ul {
     list-style-type: none;
     margin: 0;
     padding-left: 0.5em;

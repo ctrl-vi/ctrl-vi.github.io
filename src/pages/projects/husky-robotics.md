@@ -5,7 +5,7 @@ article:
     authors: ["Violet Monserate"]
     section: Personal Projects
     tags: ["js", "vite", "react", "cesium", "resium"]
-layout: ../../components/MarkdownProjectLayout.astro
+layout: '@components/MarkdownProjectLayout.astro'
 title: Husky Robotics
 description: Improvements to the Husky Robotics rover control interface utilizing React components in JSX
 seoDescription: Violet Monserate's React widgets to track Mars rover using JSX, Cesium, delivering glTF tiles in RESTful URI. Rover controls, telemetry, and pathing.

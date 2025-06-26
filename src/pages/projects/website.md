@@ -5,7 +5,7 @@ article:
     authors: ["Violet Monserate"]
     section: Personal Projects
     tags: ["astro", "html", "jsx", "vite", "css" ]
-layout: ../../components/MarkdownProjectLayout.astro
+layout: '@components/MarkdownProjectLayout.astro'
 title: Personal Website
 description: Crafting a fast, Multi-Page Application (MPA) in Astro to host personal information and publish projects
 seoDescription: Using Astro (HTML, JSX, Vite, CSS) for rich, fast, and efficient Multi-Page Application (MPA), crafting Astro components from scratch to streamline publishing.

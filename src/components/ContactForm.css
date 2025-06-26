@@ -1,0 +1,42 @@
+form {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+label {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+input,
+textarea,
+button {
+  padding: 0.65em;
+  max-width: 40em;
+  font-size: 1em;
+  border: grey solid 1px;
+}
+
+.invalid {
+  border: red solid 1px;
+}
+
+.submit {
+  margin-top: 1.5em;
+}
+
+.alert {
+  padding: 1em;
+  background-color: lavender;
+  color: black;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: black;
+  font-weight: bold;
+  float: right;
+  cursor: pointer;
+}

@@ -1,0 +1,27 @@
+---
+import { getCollection } from "astro:content";
+import "./CardGrid.css";
+import Card from "./Card.astro";
+
+const projects = await getCollection("projects");
+const sortedProjects = projects.sort((a, b) => {
+    return b.data.startDate.getTime() - a.data.startDate.getTime();
+});
+---
+
+<div class="card-container">
+    {
+        sortedProjects.map((project) => (
+            <Card
+                title={project.data.title}
+                image={project.data.image.src}
+                alt={project.data.image.alt}
+                description={project.data.description}
+                link={`/projects/${project.id}`}
+                startDate={project.data.startDate}
+                finishDate={project.data.finishDate}
+                icons={project.data.icons}
+            />
+        ))
+    }
+</div>

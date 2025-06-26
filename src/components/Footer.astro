@@ -1,11 +1,10 @@
 ---
 import Social from "./Social.astro";
 import "./Footer.css";
-import github from "@assets/footerIcons/github.svg"
-import linkedin from "@assets/footerIcons/linkedin.svg"
-import phone from "@assets/footerIcons/phone.svg"
-import mail from "@assets/footerIcons/mail.svg"
-
+import github from "@assets/footerIcons/github.svg";
+import linkedin from "@assets/footerIcons/linkedin.svg";
+import phone from "@assets/footerIcons/phone.svg";
+import mail from "@assets/footerIcons/mail.svg";
 
 const year = new Date().getFullYear();
 ---
@@ -16,27 +15,31 @@ const year = new Date().getFullYear();
     <p>Developed using <a href="https://astro.build/">Astro.</a></p>
     <p>
       <a href="https://github.com/ctrl-vi/ctrl-vi.github.io/issues"
-        >Report Bugs</a>
+        >Report Bugs</a
+      >
     </p>
   </div>
-    
+
   <div class="socials">
-    <Social 
-      image={github} 
+    <Social
+      image={github}
       alt="Github logo links to Violet Monserate's personal Github"
-      link="https://github.com/ctrl-vi" />
+      link="https://github.com/ctrl-vi"
+    />
     <Social
       image={linkedin}
       alt="LinkedIn logo links to Violet Monserate's LinkedIn"
       link="https://www.linkedin.com/in/violet-monserate/"
     />
-    <Social 
-      image={phone} 
+    <Social
+      image={phone}
       alt="Phone icon links to calling Violet Monserate's personal number"
-      link="tel:425-970-5779" />
-    <Social 
-      image={mail} 
+      link="tel:425-970-5779"
+    />
+    <Social
+      image={mail}
       alt="Mail icon links to sending Violet Monserate an email"
-      link="mailto:violetmonserate@gmail.com" />
+      link="mailto:violetmonserate@gmail.com"
+    />
   </div>
 </footer>

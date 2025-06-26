@@ -48,7 +48,7 @@ const kvArray: [string, ImageMetadata][] = [
     ["python", python],
     ["react", react],
     ["vite", vite],
-    ["wpilib", wpilib]
+    ["wpilib", wpilib],
 ];
 const iconMap = new Map<string, ImageMetadata>(kvArray);
 
@@ -69,7 +69,15 @@ const dateString = formatDate(startDate) + " - " + formatDate(finishDate);
         <p class="card-date">{dateString}</p>
 
         <div class="card-icon-container">
-            {icons.map((icon: string) => <Image src={iconMap.get(icon) ?? blank} alt={`${icon}'s icon`} loading="lazy" />)}
+            {
+                icons.map((icon: string) => (
+                    <Image
+                        src={iconMap.get(icon) ?? blank}
+                        alt={`${icon}'s icon`}
+                        loading="lazy"
+                    />
+                ))
+            }
         </div>
         <p class="card-text">{description}</p>
     </div>

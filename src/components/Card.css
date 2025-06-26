@@ -1,24 +1,24 @@
 .card {
-    box-shadow: 0 0.5em 1em 0 rgba(0,0,0,0.2);
+    box-shadow: 0 0.5em 1em 0 rgba(0, 0, 0, 0.2);
     transition: 0.15s;
     height: 100%;
 }
 
 a {
-      text-decoration: none;
-      color: inherit;
- }
-
-.card:hover {
-    box-shadow: 0 1em 2em 0 rgba(0,0,0,0.2);
+    text-decoration: none;
+    color: inherit;
 }
 
-.card > .card-image {
+.card:hover {
+    box-shadow: 0 1em 2em 0 rgba(0, 0, 0, 0.2);
+}
+
+.card>.card-image {
     width: 100%;
     height: auto;
 }
 
-.card > .card-icon-container {
+.card>.card-icon-container {
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
@@ -27,20 +27,21 @@ a {
     gap: 1em 1em;
 }
 
-.card > .card-icon-container > img {
+.card>.card-icon-container>img {
     width: auto;
     height: 1.5em;
 }
-.card > h2 {
+
+.card>h2 {
     text-align: center;
 }
 
-.card > .card-text {
+.card>.card-text {
     margin: 1em;
     text-align: center;
 }
 
-.card > .card-date {
+.card>.card-date {
     text-align: center;
     color: grey;
 }

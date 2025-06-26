@@ -1,8 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import personalLogo from "@assets/logo.svg";
-import "./Header.css"
+import "./Header.css";
 ---
+
 <div class="header">
-    <a href="/"><Image src={personalLogo} alt="Personal logo. White text on a purple background. The text reads &quot;VM&quot; and the background has tiny circuit board traces" loading="eager"/></a> 
+    <a href="/"
+        ><Image
+            src={personalLogo}
+            alt='Personal logo. White text on a purple background. The text reads "VM" and the background has tiny circuit board traces'
+            loading="eager"
+        /></a
+    >
 </div>

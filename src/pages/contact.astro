@@ -1,0 +1,22 @@
+---
+import Layout from "@components/Layout.astro";
+
+import "../styles/global.css";
+import ContactForm from "@components/ContactForm.astro";
+
+const pageTitle = "Contact Me";
+const ogType = "website";
+const ogDescription =
+    "Get in touch with Violet Monserate — send a message/email, request a collaboration, or just say hi.";
+const seoDescription =
+    "Want to email, collaborate, contact, ask a question, or get in touch? Use the contact form to reach Violet Monserate directly.";
+---
+
+<Layout {pageTitle} {ogType} {ogDescription} {seoDescription}>
+    <h1>{pageTitle}</h1>
+    <p>
+        Want to send a message, request a collaboration, or just say hi? Feel
+        free to do so in the form below :)
+    </p>
+    <ContactForm />
+</Layout>

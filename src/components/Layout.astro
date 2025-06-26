@@ -7,35 +7,38 @@ import Footer from "./Footer.astro";
 import Navigation from "./Navigation.astro";
 import "./Layout.css";
 
-
 interface Props {
-    pageTitle: string,
-    ogType: string,
+    pageTitle: string;
+    ogType: string;
     article?: {
-      publishedTime?: string;
-      modifiedTime?: string;
-      expirationTime?: string;
-      authors?: string[];
-      section?: string;
-      tags?: string[];
-    },
-    ogDescription: string,
-    seoDescription: string
+        publishedTime?: string;
+        modifiedTime?: string;
+        expirationTime?: string;
+        authors?: string[];
+        section?: string;
+        tags?: string[];
+    };
+    ogDescription: string;
+    seoDescription: string;
 }
 
-const { pageTitle, ogType, article, ogDescription, seoDescription } = Astro.props;
+const { pageTitle, ogType, article, ogDescription, seoDescription } =
+    Astro.props;
 const { url } = Astro;
 const fullTitle = `${pageTitle} | Violet Monserate`;
-const profile = ogType === "profile" ? [
-    {property: "profile:first_name", content: "Violet"},
-    {property: "profile:last_name", content: "Monserate"},
-    {property: "profile:username", content: "@ctrl.vi"},
-    {property: "profile:gender", content: "female"}
-] : []; 
+const profile =
+    ogType === "profile"
+        ? [
+              { property: "profile:first_name", content: "Violet" },
+              { property: "profile:last_name", content: "Monserate" },
+              { property: "profile:username", content: "@ctrl.vi" },
+              { property: "profile:gender", content: "female" },
+          ]
+        : [];
 ---
 
 <html lang="en">
-    <head>       
+    <head>
         <SEO
             title={fullTitle}
             description={seoDescription}
@@ -62,34 +65,66 @@ const profile = ogType === "profile" ? [
             }}
             extend={{
                 link: [
-                    {rel: "shortcut icon", sizes: "16x16 24x24 32x32 48x48 64x64", href: "favicon.ico"},
-                    {rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png"},
-                    {rel: "icon", type: "image/svg+xml", href: "/favicon.svg"},
-                    {rel: "icon", type: "image/png", sizes: "16x16", href: "/favicon-16x16.png"},
-                    {rel: "icon", type: "image/png", sizes: "32x32", href: "/favicon-32x32.png"},
-                    {rel: "icon", type:"image/x-icon", href: "/favicon.ico"},
-                    {rel: "manifest", href: "/site.webmanifest"},
-                    {rel: "preconnect", href: "https://fonts.googleapis.com"},
-                    {rel: "preconnect", href: "https://fonts.gstatic.com"},
-                    {rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"}          
+                    {
+                        rel: "shortcut icon",
+                        sizes: "16x16 24x24 32x32 48x48 64x64",
+                        href: "favicon.ico",
+                    },
+                    {
+                        rel: "apple-touch-icon",
+                        sizes: "180x180",
+                        href: "/apple-touch-icon.png",
+                    },
+                    {
+                        rel: "icon",
+                        type: "image/svg+xml",
+                        href: "/favicon.svg",
+                    },
+                    {
+                        rel: "icon",
+                        type: "image/png",
+                        sizes: "16x16",
+                        href: "/favicon-16x16.png",
+                    },
+                    {
+                        rel: "icon",
+                        type: "image/png",
+                        sizes: "32x32",
+                        href: "/favicon-32x32.png",
+                    },
+                    { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+                    { rel: "manifest", href: "/site.webmanifest" },
+                    { rel: "preconnect", href: "https://fonts.googleapis.com" },
+                    { rel: "preconnect", href: "https://fonts.gstatic.com" },
+                    {
+                        rel: "stylesheet",
+                        href: "https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap",
+                    },
                 ],
                 meta: [
-                    {name: "viewport", content: "width=device-width"},
-                    {name: "generator", content: Astro.generator},
-                    ...profile
-                ]
+                    { name: "viewport", content: "width=device-width" },
+                    { name: "generator", content: Astro.generator },
+                    ...profile,
+                ],
             }}
         />
-    </head>
-    <!-- Google tag (gtag.js) -->
-    <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-R1TYZ678W1"></script>
-    <script type="text/partytown">
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+        <slot name="head" />
+        <script
+            type="text/partytown"
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-R1TYZ678W1"
+        ></script><script type="text/partytown">
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
 
-        gtag('config', 'G-R1TYZ678W1');
-    </script>
+            gtag("config", "G-R1TYZ678W1");
+        </script></head
+    >
+    <!-- Google tag (gtag.js) -->
+
     <body>
         <Header />
         <Navigation />

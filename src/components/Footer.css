@@ -4,7 +4,7 @@ footer {
     flex-wrap: wrap;
     align-items: center;
     box-sizing: border-box;
-    background-color:#7213ad;
+    background-color: #7213ad;
     width: 100%;
     padding: 0.5em;
     margin: 0em;
@@ -29,15 +29,16 @@ footer a:hover {
 
 .info {
     flex: 0 0 auto;
-    
+
 }
 
-.socials > a {
+.socials>a {
     padding: 0.5em;
     color: white;
     text-decoration: none;
 
 }
+
 .socials {
     display: flex;
     flex-wrap: wrap;
