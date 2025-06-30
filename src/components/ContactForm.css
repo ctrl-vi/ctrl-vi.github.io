@@ -18,6 +18,15 @@ button {
   border: grey solid 1px;
 }
 
+#submit {
+  color: black;
+  background-color: lightgray;
+}
+
+#submit:hover {
+  background-color: rgb(200, 200, 200);
+  cursor: pointer;
+}
 .invalid {
   border: red solid 1px;
 }
