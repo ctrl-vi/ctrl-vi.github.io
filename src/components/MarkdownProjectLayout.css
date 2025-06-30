@@ -7,6 +7,12 @@ hr {
     border: 1px solid lightgray;
 }
 
+img + em {
+    display: block;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
 .md-slot img {
     width: 50%;
     height: 50%;
@@ -14,7 +20,10 @@ hr {
     margin: auto;
 }
 
-@media screen and (max-width: 600px) {
+.md-slot p, .md-slot li {
+    line-height: 1.5em;
+}
+@media screen and (max-width: 800px) {
     .md-slot img {
         width: 100%;
         height: 100%;

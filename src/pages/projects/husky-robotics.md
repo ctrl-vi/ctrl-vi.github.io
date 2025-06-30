@@ -12,6 +12,6 @@ seoDescription: Violet Monserate's React widgets to track Mars rover using JSX, 
 image:
     src: "@assets/rays.webp"
     alt: "The Astro logo on a dark background with rainbow rays."
-startDate: '2023-01'
+startDate: '2023-10'
 icons: ["js", "vite", "react", "cesium", "github"]
 ---

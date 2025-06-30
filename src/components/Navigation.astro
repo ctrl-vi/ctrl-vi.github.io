@@ -9,17 +9,32 @@ interface Frontmatter {
     image: string;
     description: string;
     startDate: Date;
+    finishDate?: Date;
 }
 const matches = import.meta.glob<MarkdownInstance<Frontmatter>>(
     "../pages/projects/*.md",
     { eager: true },
 );
 const allProjects = Object.values(matches).sort((a, b) => {
-    return (
-        new Date(b.frontmatter.startDate).getTime() -
-        new Date(a.frontmatter.startDate).getTime()
-    );
+    // If one activity is ongoing, and the other isn't, then onging activity is first
+    if (!a.frontmatter.finishDate && b.frontmatter.finishDate) {
+        return -1;
+    }
+    if (b.frontmatter.finishDate && !b.frontmatter.finishDate) {
+        return 1;
+    }
+
+    // If both are finished, sort by that first
+    if (a.frontmatter.finishDate && b.frontmatter.finishDate) {
+        const result = new Date(b.frontmatter.finishDate).getTime() - new Date(a.frontmatter.finishDate).getTime();
+        if (result != 0) {
+            return result;
+        }
+    }
+    // Then sort by start date
+    return new Date(b.frontmatter.startDate).getTime() - new Date(a.frontmatter.startDate).getTime();
 });
+
 const size = allProjects.length;
 ---
 
@@ -27,7 +42,7 @@ const size = allProjects.length;
     <ul>
         <Navlink title="Home" link="/" />
         <Navlink title="About" link="/about" />
-        <NavDropdown title="Projects" link="/projects">
+        <NavDropdown title="Technical Projects" link="/projects">
             {
                 allProjects.map((project) => (
                     <a href={project.url}>{project.frontmatter.title}</a>
