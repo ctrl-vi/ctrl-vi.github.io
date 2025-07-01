@@ -25,6 +25,8 @@
     display: block;
     text-align: left;
     text-wrap: break-word;
+    transition: 0.1s;
+
 }
 
 /* Add a grey background color to dropdown links on hover */
