@@ -4,8 +4,9 @@
     align-items: center;
     justify-content: center;
     min-height: 70vh;
+    margin-top: 1em;
+    margin-bottom: 1em;
     gap: 2em;
-    padding: 2em 1em;
 }
 
 #left {
@@ -27,11 +28,6 @@ h1 strong {
   display: block;
   font-style: normal;
   font-size: 75%;
-}
-
-img {
-    margin: 0;
-    padding: 0;
 }
 
 .button {
