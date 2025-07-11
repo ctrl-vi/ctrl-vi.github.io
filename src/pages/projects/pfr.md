@@ -3,17 +3,21 @@ article:
     publishedTime: "2025-06-19T02:07:41Z"
     modifiedTime: "2025-06-19T02:07:41Z"
     authors: ["Violet Monserate"]
-    section: Personal Projects
+    section: Club Projects
     tags: ["java", "c++", "python", "opencv", "wpilib", "inventor", "opensource"]
 layout: '@components/MarkdownProjectLayout.astro'
 title: Phoenix Force Robotics
 description: "Numerous contributions to the competition robot, from kinematics to award-winning computer vision"
 seoDescription: "Violet Monserate's contributed to FRC (FIRST Robotics Competition) in Java, C++, Python, Inventor, winning Industrial Design Award for Computer Vision. "
 image:
-    src: "@assets/arc.webp"
-    alt: The Astro logo on a dark background with a purple gradient arc.
+    src: "@assets/robotics.png"
+    alt: Collage of 3 different FIRST Robotics Competititon robots from 3 different years
 startDate: 2019-09
 finishDate: 2023-06
 icons: ["java", "cpp", "python", "opencv", "wpilib", "github"]
+
+---
+
+![Collage of 3 different FIRST Robotics Competititon robots from 3 different years](@assets/robotics.png) 
 
 ---

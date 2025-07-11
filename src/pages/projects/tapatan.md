@@ -10,9 +10,13 @@ title: Tapatan
 description: "Basic tic-tac-toe-like video game with a GUI and win conditions"
 seoDescription: "Violet Monserate's tic-tac-toe game for intro computer science course at University of Washington in Java"
 image:
-    src: "@assets/arc.webp"
-    alt: The Astro logo on a dark background with a purple gradient arc.
+    src: '@assets/tapatan.png'
+    alt: A Command Line ASCII art displaying the board for Tapatan, saying "It is now WHITE's turn"
 startDate: 2023-10
 finishDate: 2023-10
 icons: ["java", "github"]
+---
+
+![A Command Line ASCII art displaying the board for Tapatan, saying "It is now WHITE's turn"](@assets/tapatan.png) 
+
 ---

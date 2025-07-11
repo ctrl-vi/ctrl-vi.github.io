@@ -7,7 +7,7 @@ article:
     tags: ["astro", "html", "jsx", "vite", "css" ]
 layout: '@components/MarkdownProjectLayout.astro'
 title: Personal Website
-description: Crafting a fast, reactive Multi-Page Application (MPA) in Astro to host personal information and publish projects
+description: Crafting a fast, reactive Multi-Page Application to host personal information and publish projects
 seoDescription: Using Astro (HTML, JSX, Vite, CSS) for rich, fast, and efficient Multi-Page Application (MPA), crafting Astro components from scratch to streamline publishing.
 image:
     src: "@assets/website/website-thumbnail.png"
@@ -19,7 +19,7 @@ icons: ["astro", "html", "css", "vite", "github" ]
 
 ---
 
-One of piece of advise I—along with every other student in STEM—recieved is to build a personal website and park all my projects onto there. With this in mind, I have made this website, but it's not any ordinary website; I set myself some additional objectives:
+One of piece of advise I—along with every other student in STEM—consistently recieve is to build a personal website and park all my projects onto there. With this in mind, I have made this website, but it's not any ordinary website; I set myself some additional objectives:
 
 1. **Make it snappy**: I am so sick of slow, ram-consuming websites that run thounds of lines of JavaScript, and wanted to return a more traditional form of web-development, focused more on quickly delivering information to users.
 2. **Make it accessible**: I wanted to make sure that all elements of the website would be as universally usable as possible, by including good alt text in images, minimizing how much JavaScript is used, and following other aspects laid out by [the Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/TR/WCAG21/). In this point, I also wanted to be easily usable on a computer, tablet, phone, or otherwise.

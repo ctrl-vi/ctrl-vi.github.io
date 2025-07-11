@@ -32,11 +32,13 @@ const authorString =
     ogDescription={frontmatter.description}
     seoDescription={frontmatter.seoDescription}
 >
-    <h1>{frontmatter.title}</h1>
-    <p class="date">{startDate} - {finishDate}</p>
-    <p><em>{frontmatter.description}</em></p>
-    <p>Written by: {authorString}</p>
-    <div class="md-slot">
-        <slot />
+    <div id="article-content">
+        <h1>{frontmatter.title}</h1>
+        <p class="date">{startDate} - {finishDate}</p>
+        <p><em>{frontmatter.description}</em></p>
+        <p>Written by: {authorString}</p>
+        <div class="md-slot">
+            <slot />
+        </div>
     </div>
 </Layout>

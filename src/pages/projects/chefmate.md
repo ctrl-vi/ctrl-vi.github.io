@@ -3,7 +3,7 @@ article:
     publishedTime: "2025-06-30T02:07:41Z"
     modifiedTime: "2025-06-30T02:07:41Z"
     authors: ["Joo Gyeong Kim", "Kaylie Marie Nakaya", "Saan Lily Popović", "Violet Monserate"]
-    section: Personal Projects
+    section: Class Projects
     tags: ["figma", "HCI", "UX"]
 layout: '@components/MarkdownProjectLayout.astro'
 title: ChefMate

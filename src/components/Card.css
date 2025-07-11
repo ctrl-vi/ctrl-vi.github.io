@@ -17,7 +17,7 @@ a {
 .card>.card-image {
     width: 100%;
     height: auto;
-    border-radius: 1em 1em 0px 0px; 
+    border-radius: 1em 1em 0em 0em; 
 }
 
 .card>.card-icon-container {

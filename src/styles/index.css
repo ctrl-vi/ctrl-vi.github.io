@@ -23,6 +23,12 @@
     display: block;
 }
 
+h1 strong {
+  display: block;
+  font-style: normal;
+  font-size: 75%;
+}
+
 .button {
     background: #7213ad;
     border: none;
