@@ -12,7 +12,7 @@
     height: 100%;
     line-height: 1em;
     transition: 0.1s;
-
+    cursor: pointer;
 }
 
 .link a:hover,
