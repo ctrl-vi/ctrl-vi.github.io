@@ -34,6 +34,10 @@
     background-color: #e8e8e8;
 }
 
+/* Ensure that the dropdown is highlighted when clicked */
+.dropdown.open {
+    background-color: #af2eff;
+}
 /* Show the dropdown menu on hover */
 .dropdown.open .dropdown-content {
     display: block;
