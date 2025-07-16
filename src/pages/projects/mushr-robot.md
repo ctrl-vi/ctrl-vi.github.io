@@ -64,14 +64,14 @@ With an idea of the map and the robot position, we could start controlling the r
 PID is an extremely simple, and can be expressed with the equation
 
 $$
-u(t) = - (K_p e(t) + K_i \int_0^t e(t')dt' + K_d \frac{de(t)}{dt}) 
+u(t) = - \left(K_p e(t) + K_i \int_0^t e(t')dt' + K_d \frac{de(t)}{dt} \right) 
 $$
 
 Where  $K_p$, $K_i$, and $K_d$ are constants, and $e(t)$ is how far the actual value is from the setpoint.  Similar to a spring system, we aim to dampen oscillations while avoiding overdampening the system. By changing $K_p$, $K_i$, and $K_d$, we can thus allow for a better response and behavior that matches the setpoint.
 
 ### MPC
 
-In order to generate the setpoints (which are the steering angle and wheel velocity), we must utilize a planner. While other systems are short sighted and rely on a map, MPC has the ability to weigh different plans and choose the most optimal one. First, it uses a model to solve a $T$-horizon optimization problem against our *cost function*. This penalizes states and actions that are illegal (colliding with sensed objects or the map walls) or disadvantageous (drifting off course, going slowly); the result is a sequence of actions that minimizes cost. The system does the first action then repeats the optimization from its new estimated state, until it arrives at its endpoint.
+In order to generate the setpoints (which are the steering angle and wheel velocity), we must utilize a planner. While other systems are short sighted and rely on a map, MPC has the ability to weigh different plans and choose the most optimal one. First, it uses a model to solve a $T$-horizon optimization problem against our *cost function*. This penalizes states and actions that are illegal (colliding with sensed objects or the map walls) or disadvantageous (drifting off course, going slowly) and rewarding speed and following the assigned path. The result is a sequence of actions that minimizes cost. The system does the first action, then repeats the same optimization from its new estimated state, again and again until it arrives at its endpoint.
 
 ## Planning
 
