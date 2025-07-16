@@ -36,15 +36,14 @@ img+em {
 
 pre, .md-slot pre, .katex-display {
     overflow-x: auto;
-    max-width: 100%;
+    width: 100%;
     background: #f8f8fa;
     border-radius: 0.5em;
     padding: 1em;
     box-sizing: border-box;
 }
 
-code {
-    overflow-x: auto;
-    max-width: 100%;
-    padding-bottom: 0.5em;
+.katex-display .katex {
+    display: inline-block;
+    min-width: 100%;
 }
