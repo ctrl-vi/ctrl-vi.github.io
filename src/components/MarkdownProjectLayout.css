@@ -6,10 +6,12 @@
 hr {
     border: 1px solid lightgray;
 }
+
 img {
     border-radius: 1em;
 }
-img + em {
+
+img+em {
     display: block;
     text-align: center;
     margin-top: 0.5em;
@@ -25,6 +27,24 @@ img + em {
     height: 100%;
 }
 
-.md-slot p, .md-slot li {
+.md-slot p,
+.md-slot li {
     line-height: 1.5em;
+}
+
+/* Make equations/code scrollable when they're super long*/
+
+pre, .md-slot pre, .katex-display {
+    overflow-x: auto;
+    max-width: 100%;
+    background: #f8f8fa;
+    border-radius: 0.5em;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+code {
+    overflow-x: auto;
+    max-width: 100%;
+    padding-bottom: 0.5em;
 }

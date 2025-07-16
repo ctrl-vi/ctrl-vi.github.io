@@ -1,7 +1,7 @@
 ---
 article: 
-    publishedTime: "2025-06-30T02:07:41Z"
-    modifiedTime: "2025-06-30T02:07:41Z"
+    publishedTime: "2025-06-30T02:07:41-08:00"
+    modifiedTime: "2025-06-30T02:07:41-08:00"
     authors: ["Joo Gyeong Kim", "Kaylie Marie Nakaya", "Saan Lily Popović", "Violet Monserate"]
     section: Class Projects
     tags: ["figma", "HCI", "UX"]

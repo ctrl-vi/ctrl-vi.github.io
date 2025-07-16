@@ -1,7 +1,7 @@
 ---
 article: 
-    publishedTime: "2025-06-27T10:04"
-    modifiedTime: "2025-06-27T10:04"
+    publishedTime: "2025-06-27T10:04-08:00"
+    modifiedTime: "2025-06-27T10:04-08:00"
     authors: ["Violet Monserate"]
     section: Class Projects
     tags: ["java", "github"]

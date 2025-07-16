@@ -1,7 +1,7 @@
 ---
 article: 
-    publishedTime: "2025-06-19T02:07:41Z"
-    modifiedTime: "2025-06-19T02:07:41Z"
+    publishedTime: "2025-06-19T02:07:41-08:00"
+    modifiedTime: "2025-07-15T05:49:10-08:00"
     authors: ["Violet Monserate"]
     section: Personal Projects
     tags: ["astro", "html", "jsx", "vite", "css" ]
@@ -22,7 +22,9 @@ icons: ["astro", "html", "css", "vite", "github" ]
 One of piece of advise I—along with every other student in STEM—consistently recieve is to build a personal website and park all my projects onto there. With this in mind, I have made this website, but it's not any ordinary website; I set myself some additional objectives:
 
 1. **Make it snappy**: I am so sick of slow, ram-consuming websites that run thounds of lines of JavaScript, and wanted to return a more traditional form of web-development, focused more on quickly delivering information to users.
+
 2. **Make it accessible**: I wanted to make sure that all elements of the website would be as universally usable as possible, by including good alt text in images, minimizing how much JavaScript is used, and following other aspects laid out by [the Web Content Accessibility Guidelines (WCAG)](https://www.w3.org/TR/WCAG21/). In this point, I also wanted to be easily usable on a computer, tablet, phone, or otherwise.
+
 3. **Make it pretty**: this was probably at the bottom of my list in terms of priority, but having a pretty website would give me more practice in doing proper web-development, and also feel better at showing it off to peers, recruiters, and whomever else. 
 
 ## Why Astro?
@@ -52,4 +54,20 @@ If you are curious about how the code turned out, you can view the [grid compone
 
 To REALLY simplify the process of presenting all of the different projects I have my hands in, I created a .md layout file that not only maintains the general design and style of the entire website (with the same navigation, footer, and header), but also easily interfaces with SEO utilities, OpenGraph protocol, and more. The important information that would be used by cards or SEO utilities is included in the frontmatter in a very straightforward format that I can fill out without worrying about properly formatting HTML. 
 
-You can look at the [component itself here](https://github.com/ctrl-vi/ctrl-vi.github.io/blob/main/src/components/MarkdownProjectLayout.astro).
+More recently, I was trying to utilize $\LaTeX$ to show some equations, and that led to `KaTeX`, which renders math. By using another library, `remark-math`, I am simply able to write beautiful equations like 
+
+$$
+\int_{0}^{\infty} \left( \sum_{n=1}^{\infty} \frac{\alpha_n}{n^2 + \beta^2} \right) \cdot \sqrt{\frac{\pi}{2}} \, dx = \lim_{x \to \infty} \left[ e^{-\gamma x^2} + \frac{\delta}{x^2} \right] + \text{constant}
+$$
+
+with some simple code, like so:
+
+```
+$$
+\int_{0}^{\infty} \left( \sum_{n=1}^{\infty} \frac{\alpha_n}{n^2 + \beta^2} \right) \cdot \sqrt{\frac{\pi}{2}} \, dx = \lim_{x \to \infty} \left[ e^{-\gamma x^2} + \frac{\delta}{x^2} \right] + \text{constant}
+$$
+```
+
+Or for inline things like $\Tau$, $\Beta$, or $\Kappa$, we do `$\Tau$, $\Beta$, or $\Kappa$`.
+
+You can look at the [markdown layout component itself here](https://github.com/ctrl-vi/ctrl-vi.github.io/blob/main/src/components/MarkdownProjectLayout.astro).

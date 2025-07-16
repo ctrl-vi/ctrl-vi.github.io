@@ -1,7 +1,7 @@
 ---
 article: 
-    publishedTime: '2025-06-27T10:50Z'
-    modifiedTime: '2025-06-19T10:07Z'
+    publishedTime: '2025-06-27T10:50-08:00'
+    modifiedTime: '2025-06-19T10:07-08:00'
     authors: ['Violet Monserate', 'Andrea Danila', 'Colin Lim', 'Erin Song', 'Crystal Reyes']
     section: Class Projects
     tags: ['html', 'css', 'js', 'python', 'observable', 'github']
