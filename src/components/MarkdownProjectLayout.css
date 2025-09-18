@@ -27,8 +27,9 @@ img+em {
     height: 100%;
 }
 
-.md-slot p,
-.md-slot li {
+p,
+li, 
+em {
     line-height: 1.5em;
 }
 
