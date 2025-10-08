@@ -3,6 +3,7 @@ import type { MarkdownInstance } from "astro";
 import Navlink from "./Navlink.astro";
 import NavDropdown from "./NavDropdown.astro";
 import "./Navigation.css";
+import { type CollectionEntry, getCollection } from "astro:content";
 
 interface Frontmatter {
     title: string;
@@ -11,31 +12,20 @@ interface Frontmatter {
     startDate: Date;
     finishDate?: Date;
 }
-const matches = import.meta.glob<MarkdownInstance<Frontmatter>>(
-    "../pages/projects/*.{md,mdx}",
-    { eager: true },
-);
-const allProjects = Object.values(matches).sort((a, b) => {
+
+const projects = await getCollection("projects");
+const sortedProjects = projects.sort((a, b) => {
     // If one activity is ongoing, and the other isn't, then onging activity is first
-    if (!a.frontmatter.finishDate && b.frontmatter.finishDate) {
+    if (!a.data.finishDate && b.data.finishDate) {
         return -1;
     }
-    if (b.frontmatter.finishDate && !b.frontmatter.finishDate) {
+    if (a.data.finishDate && !b.data.finishDate) {
         return 1;
     }
 
-    // If both are finished, sort by that first
-    if (a.frontmatter.finishDate && b.frontmatter.finishDate) {
-        const result = new Date(b.frontmatter.finishDate).getTime() - new Date(a.frontmatter.finishDate).getTime();
-        if (result != 0) {
-            return result;
-        }
-    }
     // Then sort by start date
-    return new Date(b.frontmatter.startDate).getTime() - new Date(a.frontmatter.startDate).getTime();
+    return b.data.startDate.getTime() - a.data.startDate.getTime();
 });
-
-const size = allProjects.length;
 ---
 
 <script is:inline>
@@ -63,8 +53,8 @@ const size = allProjects.length;
         <NavDropdown title="Technical Projects">
             <a href="/projects">All Projects</a>
             {
-                allProjects.map((project) => (
-                    <a href={project.url}>{project.frontmatter.title}</a>
+                projects.map((project) => (
+                    <a href={project.id}>{project.data.title}</a>
                 ))
             }
         </NavDropdown>
