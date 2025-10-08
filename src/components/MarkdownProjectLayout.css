@@ -33,6 +33,10 @@ em {
     line-height: 1.65em;
 }
 
+lite-youtube {
+  min-width: 100%;
+}
+
 /* Make equations/code scrollable when they're super long*/
 
 pre, .md-slot pre, .katex-display {

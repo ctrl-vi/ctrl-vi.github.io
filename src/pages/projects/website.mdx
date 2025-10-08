@@ -18,6 +18,7 @@ icons: ["astro", "html", "css", "vite", "github" ]
 ![Thumbnail for Violet Monestrate's personal website, featuring the letters 'VM' and blue, white and purple swirls.](@assets/website/website-thumbnail.png)
 
 ---
+import {YouTube} from 'astro-embed';
 
 One of piece of advise I—along with every other student in STEM—consistently recieve is to build a personal website and park all my projects onto there. With this in mind, I have made this website, but it's not any ordinary website; I set myself some additional objectives:
 
@@ -71,3 +72,11 @@ $$
 Or for inline things like $\Tau$, $\Beta$, or $\Kappa$, we do `$\Tau$, $\Beta$, or $\Kappa$`.
 
 You can look at the [markdown layout component itself here](https://github.com/ctrl-vi/ctrl-vi.github.io/blob/main/src/components/MarkdownProjectLayout.astro).
+
+### Embedded Youtube Videos
+
+I realized that sometimes I want to demonstrate my work through a Youtube video. Thankfully, there's `astro-embed`, which gives me a simple Astro component that I can utilizes inside of `.mdx` files. Noting that these files have to be `.mdx`, due to the utilization of a component within the Markdown.
+
+With this, I can add any Youtube video to my Markdown, such as the following:
+
+<YouTube id="TtRtkTzHVBU" posterQuality="max"   title="I can edit the title of a video!"/>
