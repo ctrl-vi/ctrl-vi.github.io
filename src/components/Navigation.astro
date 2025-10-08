@@ -12,7 +12,7 @@ interface Frontmatter {
     finishDate?: Date;
 }
 const matches = import.meta.glob<MarkdownInstance<Frontmatter>>(
-    "../pages/projects/*.md",
+    "../pages/projects/*.{md,mdx}",
     { eager: true },
 );
 const allProjects = Object.values(matches).sort((a, b) => {

@@ -18,6 +18,10 @@ body {
     min-height: 100%;
 }
 
+
+p {
+    line-height: 1.3em;
+}
 hr {
     border: 1px solid lightgray;
 }
@@ -25,3 +29,4 @@ hr {
 footer {
     flex-shrink: 0;
 }
+

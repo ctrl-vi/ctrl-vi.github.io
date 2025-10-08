@@ -58,6 +58,7 @@ p {
     font-size: 1.1em;
     color: #333;
     margin-bottom: 1.5em;
+    line-height: 1.3em;
 }
 
 @media (max-width: 900px) {

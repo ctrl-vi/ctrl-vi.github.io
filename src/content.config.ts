@@ -6,7 +6,7 @@ export type Icon = {
     alt: string
 }
 const projects = defineCollection({
-    loader: glob({ pattern: "**/*.md", base: "./src/pages/projects" }),
+    loader: glob({ pattern: ["**/*.md", "**/*.mdx"], base: "./src/pages/projects" }),
     schema: ( {image} ) => z.object({
         article: z.object({
             publishedTime: z.coerce.date(),
