@@ -27,12 +27,6 @@ img+em {
     height: 100%;
 }
 
-p,
-li, 
-em {
-    line-height: 1.65em;
-}
-
 lite-youtube {
   min-width: 100%;
 }
