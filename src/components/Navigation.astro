@@ -54,7 +54,7 @@ const sortedProjects = projects.sort((a, b) => {
             <a href="/projects">All Projects</a>
             {
                 projects.map((project) => (
-                    <a href={project.id}>{project.data.title}</a>
+                    <a href={`/projects/${project.id}`}>{project.data.title}</a>
                 ))
             }
         </NavDropdown>
