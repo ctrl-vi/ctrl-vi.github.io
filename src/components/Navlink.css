@@ -3,7 +3,8 @@
 
 }
 
-.link a {
+.link > a,
+.link > .dropdown > a {
     display: block;
     color: white;
     text-align: center;
@@ -15,7 +16,7 @@
     cursor: pointer;
 }
 
-.link a:hover,
+.link > a:hover,
 .dropdown:hover {
     background-color: #af2eff;
 }
