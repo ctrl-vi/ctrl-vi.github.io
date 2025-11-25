@@ -1,13 +1,14 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
 
 import astro from "@cardIcons/astro.png";
 import cesium from "@cardIcons/cesium.png";
 import coreml from "@cardIcons/coreml.webp";
+import c from "@cardIcons/c.png";
 import cpp from "@cardIcons/cpp.png";
 import css from "@cardIcons/css.png";
 import figma from "@cardIcons/figma.svg";
+import gdb from "@cardIcons/gdb.jpg";
 import github from "@cardIcons/github.svg";
 import gitlab from "@cardIcons/gitlab.png";
 import html from "@cardIcons/html.png";
@@ -20,6 +21,7 @@ import python from "@cardIcons/python.png";
 import react from "@cardIcons/react.png";
 import ros2 from "@cardIcons/ros2.png";
 import swift from "@cardIcons/swift.webp";
+import valgrind from "@cardIcons/valgrind.png";
 import verilog from "@cardIcons/verilog.png";
 import vite from "@cardIcons/vite.png";
 import wpilib from "@cardIcons/wpilib.png";
@@ -45,10 +47,12 @@ const kvArray: [string, ImageMetadata][] = [
     ["astro", astro],
     ["cesium", cesium],
     ["coreml", coreml],
+    ["c", c],
     ["cpp", cpp],
     ["c++", cpp],
     ["css", css],
     ["figma", figma],
+    ["gdb", gdb],
     ["github", github],
     ["gitlab", gitlab],
     ["html", html],
@@ -62,11 +66,12 @@ const kvArray: [string, ImageMetadata][] = [
     ["ros2", ros2],
     ["react", react],
     ["swift", swift],
+    ["valgrind", valgrind],
     ["verilog", verilog],
     ["vite", vite],
     ["wpilib", wpilib],
 ];
-const iconMap = new Map<string, ImageMetadata>(kvArray);
+const iconMap = new Map<string, ImageMetadata | string>(kvArray);
 
 function formatDate(date?: Date) {
     if (date == null) {

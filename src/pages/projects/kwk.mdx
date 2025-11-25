@@ -1,0 +1,46 @@
+---
+article: 
+    publishedTime: "2025-06-27T10:50-08:00"
+    modifiedTime: "2025-06-19T10:07-08:00"
+    authors: ["Violet Monserate", "Chelsea Liu", "Pari Aiyer"]
+    section: Personal Projects
+    tags: ["swift", "coreml" ]
+layout: '@components/MarkdownProjectLayout.astro'
+title: iRecycle
+description: Utilizing AI and ML to help people identify and sort their trash in a convinient iOS mobile app
+seoDescription: Generalizable AI and ML to help people identify and sort their trash into compost, recycling, and garbage in a convinient iOS mobile app in Swift
+image:
+    src: "@assets/irecycle.jpg"
+    alt: The iRecycle logo with slogan saying "Make Haste, Not Waste"
+startDate: 2022-06
+finishDate: 2022-08
+icons: ["swift", "coreml"]
+---
+import {YouTube} from 'astro-embed';
+
+<YouTube id="sN9JKru9Vho" posterQuality="max"
+/>
+---
+
+## Overview
+
+During the summer before my senior year of high school, I had the wonderful opportunity to do a 2 week bootcamp through Kode with Klossy: a non-profit that provides free coding camps and programs for young women and gender-expansive teens aged 13-18. During my boot camp, everyone worked with Swift and Machine Learning, and in the end created an MVP demonstrating the way in which Machine Learning can be used to help our communities.
+
+## What is iRecycle
+
+Rooted in a dedication to environmentalism, our group saw how hard it was to sort out trash, and figure out which bin to put the item in. Utilizing Machine Learning, specifically an image classifier, we were able to split any given object into 3 different categories: trash, recycling, and compost. We also ensured that it was location specific, as laws and legislation differed from state to state, and city to city. 
+
+## Tech Stack
+
+In order to make the app, we had the following steps
+
+1. Brainstorm ideas in notepad, thinking about what we really cared about as a group
+2. Upon choosing a topic, we trained a ML image classifier using Co-ML (a tool developed by Apple). This involved many rounds of collecting training data and testing the resulting model.
+3. We then created the logo and wireframed out a prototype within Keynote
+4. And at the end, we write all of the code in Swift to be used on iPhone and iPad!
+
+## Challenges
+
+The ML training had many issues, especially in terms of generalizability, and we simply added more data to ensure that our model had encountered a variety of different environments. 
+
+Another thing we noticed is that with too much data, the model would actually struggle in generalizing, and thus we also tried to collect only a couple examples for a singular object.

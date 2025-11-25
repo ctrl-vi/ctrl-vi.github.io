@@ -21,3 +21,8 @@ icons: ["java", "postgres"]
 
 ---
 
+## [WIP] Overview
+
+In this project, I learned about how to link an application to a database, specifically through the use of JDBC, while also going through the whole process of designing a database, including generating an ER diagram to include every entity and relationship we'd possibly need. 
+
+*MORE DETAILS TO COME SOON (PLUS PHOTOS!)*
