@@ -2,11 +2,13 @@
 import { Image } from "astro:assets";
 
 import astro from "@cardIcons/astro.png";
+import arduino from '@cardIcons/arduino.png';
 import cesium from "@cardIcons/cesium.png";
 import coreml from "@cardIcons/coreml.webp";
 import c from "@cardIcons/c.png";
 import cpp from "@cardIcons/cpp.png";
 import css from "@cardIcons/css.png";
+import esp_idf from "@cardIcons/esp-idf.png";
 import figma from "@cardIcons/figma.svg";
 import gdb from "@cardIcons/gdb.jpg";
 import github from "@cardIcons/github.svg";
@@ -44,12 +46,14 @@ const { link, title, startDate, finishDate, image, alt, description, icons } =
     Astro.props;
 
 const kvArray: [string, ImageMetadata][] = [
+    ["arduino", arduino],
     ["astro", astro],
     ["cesium", cesium],
     ["coreml", coreml],
     ["c", c],
     ["cpp", cpp],
     ["c++", cpp],
+    ["esp-idf", esp_idf],
     ["css", css],
     ["figma", figma],
     ["gdb", gdb],

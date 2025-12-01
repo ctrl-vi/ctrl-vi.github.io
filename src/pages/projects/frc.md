@@ -6,7 +6,7 @@ article:
     section: Club Projects
     tags: ["java", "c++", "python", "opencv", "wpilib", "inventor", "opensource"]
 layout: '@components/MarkdownProjectLayout.astro'
-title: FIRST Robotics Compeition
+title: FIRST Robotics
 description: "Numerous contributions to the competition robots, from kinematics to award-winning computer vision"
 seoDescription: "Violet Monserate's contributed to FRC (FIRST Robotics Competition) in Java, C++, Python, Inventor, winning Industrial Design Award for Computer Vision. "
 image:
