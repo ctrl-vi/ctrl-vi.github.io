@@ -1,33 +1,30 @@
 #content {
     display: flex;
-    flex-flow: row-reverse nowrap;
-    align-items: center;
-    justify-content: center;
-    min-height: 70vh;
+    flex-direction: row-reverse;
+    align-content: flex-start;
+    gap: 3em;
     margin-top: 1em;
-    margin-bottom: 1em;
-    gap: 2em;
 }
 
-#left {
-    flex: 1 1 300px;
-    max-width: 500px;
+#headshot-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 #headshot {
-    width: 100%;
+    width: 65vw;
     height: auto;
     border-radius: 1em;
-    box-shadow: 0 4px 24px rgba(80, 0, 120, 0.15);
-    object-fit: cover;
-    margin: 0 auto;
-    display: block;
 }
 
-h1 strong {
-  display: block;
-  font-style: normal;
-  font-size: 75%;
+h1 {
+    margin: 0;
+    padding: 0;
+}
+
+#pronouns {
+    font-size: 70%;
 }
 
 .button {
@@ -44,34 +41,25 @@ h1 strong {
     transition: 0.1s;
     cursor: pointer;
 }
+
 .button:hover, .button:focus {
     background: #af2eff;
 }
 
-h1 {
-    font-size: 2.5em;
-    margin-bottom: 0.2em;
-    margin-top: 0em;
-}
 
-p {
-    font-size: 1.1em;
-    color: #333;
-    margin-bottom: 1.5em;
-    line-height: 1.3em;
-}
+
 
 @media (max-width: 900px) {
     #content {
         flex-direction: column;
-        align-items: stretch;
-        gap: 1.5em;
-        min-height: unset;
+        gap: 1em;
     }
+    
     #headshot {
-        margin-bottom: 1em;
+        width: 100%;
     }
-    #left {
+    
+    #intro {
         max-width: 100%;
     }
 }
