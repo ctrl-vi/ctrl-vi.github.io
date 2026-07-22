@@ -14,7 +14,7 @@ footer {
 
 footer p {
     font-size: 0.8em;
-    padding: 0.5em;
+    padding-bottom: calc(0.5em + env(safe-area-inset-bottom));
     color: white;
     margin: 0;
 }
