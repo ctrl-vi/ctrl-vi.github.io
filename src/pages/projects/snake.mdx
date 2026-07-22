@@ -1,7 +1,7 @@
 ---
 article: 
     publishedTime: "2025-07-01T02:07:41-08:00"
-    modifiedTime: "2025-07-01T02:07:41-08:00"
+    modifiedTime: "2026-07-23T02:07:41-08:00"
     authors: ["Violet Monserate"]
     section: Class Projects
     tags: ["verilog"]
@@ -17,16 +17,124 @@ finishDate: 2024-06
 icons: ["verilog"]
 ---
 
+
 import {YouTube} from 'astro-embed';
 
 <YouTube id="5h7svPvCOWU" posterQuality="max"
 />
 
-## [WIP] Overview
+## Overview
 
-In order to demonstrate what I'd learned in this class, I tasked myself with creating the classic phone game snake on the FPGA, while including some extensions. Every part of the class was useful in writing in the HDL, especially when developing schematics for each of the subsystems that make the game work!
+![Block diagram of all the modules in the snake game](@assets/snake/top-level.png)
+*Fig. 1: Block diagram of all the modules in the snake game.*
 
 
-*MORE DETAILS TO COME SOON*
+Above is the block diagram representing the entire game. The user input informs the pixel/wall drivers for state transitions. The length counter keeps track of the length of the snake. We then have the apple selector, which will tell us which of the pixels is an apple (utilizing a random number from the LSFR). We also have the scoreboard modules, which combine a counter and combinational logic to display a hex display signal for each (relevant) hex module. Then, we have the LED Board driver (which is preexisting) that takes in the green and red LED outputs from the drivers. To enable the ability to select a new apple/increase the length/increase the score, we have a rising edge detector so that only when the length INITIALLY increases do those things occur. There is also a clock divider, as each pixel updates ~256 slower than the fast circuits. 
 
-P.S. Can you guess what song I'm humming in the background of the video?
+The playfield module, which comprises pixel and wall drivers, runs at a slower clock speed to ensure the snake doesn't move too fast. Each pixel driver has MANY connections, including to each neighbor to know if they're representing a “head” or “green,” to each other to see if a loss occurred, the length, if there was a length increase from any other modules, the direction, whether another module has reported a loss, and finally the enable signal. We output whether this module is green red, is a head, and if this module indicates a loss or a length increase.
+
+## User Input
+
+This is the thing to filter the inputs of the keys and then utilize them with the following FSM to generate directions (the leftmost keypress takes priority, and the transition is the same coming from all states). We also store the direction, as if the keys are released, we just stay at the same state. The states represent the directions, with 00 being up, 01 being right, and so on (I initially used enums for this, but they couldn’t be used easily with ModelSim).
+
+![FSM for the direction of the snake, based on user input.](@assets/snake/user_input_fsm.png)
+*Fig. 2: FSM for the direction of the snake, based on user input.*
+
+![Simulation of the user input FSM, showing the transitions between states based on key presses.](@assets/snake/user_input_sim.png)
+*Fig. 3: Simulation of the user input FSM, showing the transitions between states based on key presses.*
+
+The above simulation shows the transition to each of the directional states, and how releasing the keys maintained state. I did not test ALL transitions strictly because that would have been overly numerous, and I simply did each of the different key combinations, irrespective of the present state (espeically considering my HDL implementation uses “if” statements on each KEY).
+
+## Counters
+
+Many modules required counters for the implementation, so I had to create two: an incrementer and a decrementer. They act similarly but with different rollovers (under vs. overflow). The following is the 3-bit version, but the implementation allows it to RESIZABLE.
+
+![Simulation of the increment counter, showing the ability to increment, reset to the default state, and load data in.](@assets/snake/counter_sim_1.png)
+*Fig. 4: Simulation of the increment counter, showing the ability to increment, reset to the default state, and load data in.*
+
+![Simulation of the decrement counter, showing the ability to decrement, reset to the default state, and load data in.](@assets/snake/counter_sim_2.png)
+*Fig. 5: Simulation of the decrement counter, showing the ability to decrement, reset to the default state, and load data in.*
+
+Here, we test the ability to increment/decrement, reset to the default state, and load data in. We can see that the values increment and decrement appropriately and load the data from the right place.
+
+## Decoders
+
+To determine what the Apple selector is selecting, we need a piece of combinational logic: an 8:256 multiplexer. Combining 17 4:16 multiplexers can achieve this by using one as a selector between the other 16.
+
+![Simulation of the 4:16 decoder, showing the ability to select one of 16 possible inputs.](@assets/snake/decoder_1.png)
+*Fig. 6: Simulation of the 4:16 decoder, showing the ability to select one of 16 possible inputs.*
+
+![Simulation of the 8:256 decoder, showing the ability to select one of 256 possible inputs.](@assets/snake/decoder_2.png)
+*Fig. 7: Simulation of the 8:256 decoder, showing the ability to select one of 256 possible inputs.*
+
+In both of these, we just increment the value being fed in by 1 and notice how there is only 1 bit enabled at any time and it shifts over by 1 ever single time the input changes.
+
+## Apple Selector
+
+This module will choose a new VALID square to put the apple, informed on whether it has been enabled. Note the combinational logic to decide whether to draw a new value; it calculates if the selected pixel is already occupied (with a green pixel). If not, it will then utilize that value. Also, if we are not enabled, we just stay at the current value. Note that this uses the LFSR covered in Lab 7, but with different taps and lengths!
+
+![FSM for the apple selector](@assets/snake/apple_selector_fsm.png)
+*Fig. 8: FSM for the apple selector, showing the transitions between states based on whether a new apple is needed and if the selected pixel is valid.*
+
+![Simulation of the apple selector](@assets/snake/apple_selector_sim.png)
+*Fig. 9: Simulation of the apple selector, showing the behavior of the module during operation.*
+
+In the simulation, we are selecting 39, but after we enable and choose a new value, we see that it tests 15, 31, and finally 63 before finally arriving at using it. It is checking it against a 256-long bus of values representing the currently unavailable pixels, noting that 15 and 31 are not allowed there, but 63 is!
+
+## Scoreboard 
+
+These simply implement a counter and then decode that output to be usable with the hex display. When enabled, it switches to the next value on the display. Note that two reset signals are parameterized, so the hex displays are dimmed until required. We also only enable the enable bit when we go from 9 to 0 to indicate how it will go to 10; thus, the next display must increment (as in, these are daisy-chainable). 
+
+![FSM for the scoreboard](@assets/snake/scoreboard_fsm.png)
+*Fig. 10: FSM for the scoreboard, showing the transitions between states based on whether to increment the score and if the counter has reached its maximum value.*
+
+![Simulation of the scoreboard](@assets/snake/scoreboard_sim.png)
+*Fig. 11: Simulation of the scoreboard, showing the behavior of the module during operation.*
+
+As we see in the simulation (which connects HEX2 to the carry-out of HEX1), we can increment multiple times, and then the counter will reset to 0, and then the carry-out will cause HEX2 to increment.
+
+## Pixel Module
+
+The pixel module takes in many inputs and then synthesizes them to move around the following FSM. The important states are OFF, APPLE, HEAD, BODY, and LOSS. If we get the signal that this module is an APPLE, then we transition to being an apple. The “priority 2” is just to stop me from having to write `<all the conditions that would cause OFF to go to HEAD> & (APPLE_ID == apple_selector)`. The transition from OFF to HEAD is decided on if the neighbor is a head heading “towards” this pixel, and if this is an apple (APPLE_ID is decided by a parameter fed in) then we also increase in length at that moment. Similarly, if this is an established APPLE and becomes the head, it is also a length increase. For HEAD to LOSS, if this is a head and we head towards an enabled pixel, then this is a loss. Otherwise, we progress through all the states for the body (whose length is dictated by the length passed in), and their progression is paused when the length is increased from any pixel. 
+
+![FSM for the pixel module](@assets/snake/pixel_fsm.png)
+*Fig. 12: FSM for the pixel module, showing the transitions between states based on the input signals.*
+
+![Simulation of the pixel module](@assets/snake/pixel_sim.png)
+*Fig. 13: Simulation of the pixel module, showing the behavior of the module during operation.*
+
+Above is the individual pixel module. It shows a normal transition, and since the length is 4, the green pixels is on for only 4 clock cycles. This changes when we collect an apple. We also note how the apple can be collected even if the display green is on and the apple selector is selecting the given apple. We also show all the possible collisions that may result in a failure.
+
+## Wall Module
+
+This is identical to the pixel module, except now with an “enable” input that tells us whether to just turn on the green and red LEDs (which would gurn the pixel ORANGE), and when it is disabled it puts us into the reset. Otherwise, transitions are identical.
+
+![FSM for the wall module](@assets/snake/wall_fsm.png)
+*Fig. 14: FSM for the wall module, showing the transitions between states based on the input signals.*
+
+![Simulation of the wall module](@assets/snake/wall_sim.png)
+*Fig. 15: Simulation of the wall module, showing the behavior of the module during operation.*
+
+We check the same conditions as before, but also view and see if enable does what it should, which it does (it turns red and green high).
+
+## Playfield Module
+
+This simply is a way to compartmentalize the generation of the different pixel modules into a form that's easy to feed the output of to the LED boards, and to test it. It uses generate blocks to connect each pixel to its neighbors and the appropriate inputs. We also make sure to include the tie-ins for each of the switches, to control whether obstacles appear (with 4 different switches required)/
+
+![Simulation of the playfield module](@assets/snake/playfield_sim.png)
+*Fig. 16: Simulation of the playfield module, showing the behavior of the module during operation.*
+
+Here is the playfield waveform. Again, way less conducive to being a photo, but when you scroll through the waveform, you can see that the on bits change correctly, and you see a string of 1's in the green pixels' 2d vector that move around as the update changes. The apple also is eaten when the head hits it. Finally, we show the ability to fully enable and fully disable the obstacles, and the end-game screen with all 1's in green.
+
+## Top-level Module
+
+Our final step is to combine everything into one module. This simply involves ensuring we have the right logic buses/wires and then routing them correctly (which took a while!)
+
+![Simulation of the top-level module](@assets/snake/top_level_sim.png)
+*Fig. 17: Simulation of the top-level module, showing the behavior of the module during operation.*
+
+We finally have an example of the game being played. We use the reset switch to start the game, use the keys to change direction, and finally collect apples (since the LFSR is deterministic, we just need to head to where we know it will be). Finally, we enable all the walls and then play again. Everything works, including the blackout of the screen during a loss.
+
+## Testing
+
+The testing was first done in ModelSim, using the waveforms and seeing that they conform to expectations. This was done module by module, then in totality in the top-level design. Afterward, I would then actually play the game, doing all the edge cases you'd not normally expect in normal play (pressing multiple keys, getting points, coincidentally getting an apple directly in front of me, enabling walls DURING play, resetting in the middle of play, rapidly switching reset and enable walls). I also thought about how “random” the movement of the APPLE was, to see if the LFSR is truly scrolling through all of its valid values. After lots of small logic error rectification, we had no strange/unexpected behavior. 
