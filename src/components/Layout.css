@@ -16,7 +16,7 @@ body {
     min-height: 100vh;
     box-sizing: border-box;
     overflow-y: auto;
-    overflow-x: scroll;
+    overflow-x: auto;
 }
 
 main {
