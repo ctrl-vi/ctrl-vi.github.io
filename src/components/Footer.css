@@ -6,7 +6,7 @@ footer {
     box-sizing: border-box;
     background-color: #7213ad;
     width: 100%;
-    padding: 0.5em;
+    padding: 0.5em 0.5em calc(0.5em + env(safe-area-inset-bottom)) 0.5em;
     margin: 0em;
     box-shadow: 0em 1em 2em black;
     flex-shrink: 0;
@@ -14,7 +14,7 @@ footer {
 
 footer p {
     font-size: 0.8em;
-    padding-bottom: calc(0.5em + env(safe-area-inset-bottom));
+    padding-bottom: 0.5em;
     color: white;
     margin: 0;
 }
