@@ -3,13 +3,12 @@
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist"],
   "compilerOptions": {
-    "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@cardIcons/*": ["src/assets/cardIcons/*"],
-      "@public/*": ["public/*"],
-      "@styles/*": ["src/styles/*"]
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@cardIcons/*": ["./src/assets/cardIcons/*"],
+      "@public/*": ["./public/*"],
+      "@styles/*": ["./src/styles/*"]
     }
   }
 }
