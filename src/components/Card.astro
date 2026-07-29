@@ -22,6 +22,7 @@ import postgres from "@cardIcons/postgres.png";
 import python from "@cardIcons/python.png";
 import react from "@cardIcons/react.png";
 import ros2 from "@cardIcons/ros2.png";
+import stm32 from "@cardIcons/stm32.png";
 import swift from "@cardIcons/swift.webp";
 import valgrind from "@cardIcons/valgrind.png";
 import verilog from "@cardIcons/verilog.png";
@@ -74,8 +75,9 @@ const kvArray: [string, ImageMetadata][] = [
     ["verilog", verilog],
     ["vite", vite],
     ["wpilib", wpilib],
+    ["stm32", stm32],
 ];
-const iconMap = new Map<string, ImageMetadata | string>(kvArray);
+const iconMap = new Map<string, ImageMetadata>(kvArray);
 
 function formatDate(date?: Date) {
     if (date == null) {
@@ -100,6 +102,7 @@ const dateString = formatDate(startDate) + " - " + formatDate(finishDate);
                         src={iconMap.get(icon) ?? blank}
                         alt={`${icon}'s icon`}
                         loading="lazy"
+                        inferSize={true}
                     />
                 ))
             }

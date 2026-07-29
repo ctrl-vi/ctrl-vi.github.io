@@ -1,4 +1,5 @@
 // Declarations to allow importing image files and the @cardIcons alias in TypeScript
+import type { ImageMetadata } from 'astro';
 
 // Alias pattern for @cardIcons/* (maps to src/assets/cardIcons/* in tsconfig)
 declare module '@cardIcons/*' {
@@ -8,26 +9,26 @@ declare module '@cardIcons/*' {
 
 // Generic image module declarations
 declare module '*.png' {
-  const src: string;
+  const src: ImageMetadata;
   export default src;
 }
 
 declare module '*.jpg' {
-  const src: string;
+  const src: ImageMetadata;
   export default src;
 }
 
 declare module '*.jpeg' {
-  const src: string;
+  const src: ImageMetadata;
   export default src;
 }
 
 declare module '*.webp' {
-  const src: string;
+  const src: ImageMetadata;
   export default src;
 }
 
 declare module '*.svg' {
-  const src: string;
+  const src: ImageMetadata;
   export default src;
 }
