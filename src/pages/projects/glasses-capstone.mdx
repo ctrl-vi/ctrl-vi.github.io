@@ -46,8 +46,7 @@ The user wears or carries the device while walking through the museum. A camera 
 ![UML Diagram depicting workflow while using the product](@assets/glasses-capstone/uml-diagram.png)
 *Fig. 1: UML Diagram depicting workflow while using the product.*
 
-
-## Constraints and ENgineering Standards
+## Constraints and Engineering Standards
 
 ### Budget Constraints
 
@@ -102,8 +101,6 @@ The design considered:
 
 The sequential chart, shown in Figure 2, illustrates the flow of information through the Assistive Museum Headphone System during normal operation. Images captured by the camera are sent to the Raspberry Pi, where STAG fiducial markers are detected and matched with corresponding audio files stored in the data-mapping system. The Raspberry Pi then streams audio samples through the audio buffer and STM32 using I2S communication before the audio is played through the bone conduction speaker. User button presses are detected by the STM32 and transmitted to the Raspberry Pi through UART communication, allowing playback and volume controls to be managed in real time.
 
-
-
 ![Sequential Chart](@assets/glasses-capstone/sequential-chart.png)
 *Fig. 2: Sequential Chart*
 
@@ -146,12 +143,12 @@ Additional design revisions included planning openings for external cables and u
 *Fig. 5: Camera Holder CAD Design*
 
 ### Final Physical Product
-The final Assistive Museum Headphone product is shown in Figures 8 and 9. Figure 8 shows the custom 3D-printed enclosure containing the Raspberry Pi 4, STM32F4 Discovery board, battery, and supporting wiring. Figure 9 shows the wearable glasses assembly, which uses custom 3D-printed mounts to secure the USB camera and bone conduction speaker. Together, these components form a portable assistive museum guidance system that automatically detects STAG fiducial markers and delivers corresponding audio descriptions to the user. The completed prototype demonstrates the successful integration of computer vision, embedded control, real-time audio streaming, and mechanical packaging into a single assistive technology platform.
+The final Assistive Museum Headphone product is shown in Figures 6 and 7. Figure 6 shows the custom 3D-printed enclosure containing the Raspberry Pi 4, STM32F4 Discovery board, battery, and supporting wiring. Figure 7 shows the wearable glasses assembly, which uses custom 3D-printed mounts to secure the USB camera and bone conduction speaker. Together, these components form a portable assistive museum guidance system that automatically detects STAG fiducial markers and delivers corresponding audio descriptions to the user. The completed prototype demonstrates the successful integration of computer vision, embedded control, real-time audio streaming, and mechanical packaging into a single assistive technology platform.
 
 ![Enclosure internal view. The Raspberry Pi is nestled with the STM32 inside an orange enclosure](@assets/glasses-capstone/enclosure.png)
 *Fig. 6: Assistive Museum Headphone Final Product - Enclosure Internal View*
 
-!The final wearable product mounted on black glasses. Buttons rest on the right side of the glasses, and the camera above the bridge.[](@assets/glasses-capstone/glasses.png)
+![The final wearable product mounted on black glasses. Buttons rest on the right side of the glasses, and the camera above the bridge.](@assets/glasses-capstone/glasses.png)
 *Fig. 7: Assistive Museum Headphone Final Product - Wearable Prototype*
 
 ## Impact and Consequences
