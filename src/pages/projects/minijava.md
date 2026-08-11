@@ -17,18 +17,56 @@ finishDate: '2025-12'
 icons: ["java", "c", "assembly", "gitlab"]
 ---
 
+![Collage of two different diagrams for the Minijava Compiler project. On the left is an Abstract Syntax Tree (AST) diagram, and on the right is a diagram of the garbage collector data structure. The AST diagram shows the structure of a line of code in the MiniJava language, with nodes representing different constructs, such as statements. The garbage collector diagram illustrates how objects are managed in memory, with a linked list of allocated objects and a roots list for tracking references.](@assets/minijava/minijava.png)
+
+---
 ## Overview
 
-As a student for CSE 401 (Compilers) at UW, we were tasked with creating a compiler for a subset of Java, called MiniJava. The project involved implementing a scanner, parser, and code generator to translate MiniJava code into x86 assembly. In the end
+As students in CSE 401 (Compilers) at UW, we were tasked with creating a compiler for a subset of Java, called MiniJava. The project involved implementing a scanner, parser, and code generator to translate MiniJava code into x86 assembly. We built the scanner with JFlex, the parser with Java CUP, and used an AST visitor architecture to keep each compiler pass modular.
 
 ## Minijava Compiler Features
 
 Our code includes functionality for the MiniJava building blocks. We have functionality for:
-- Minijava arithmetic expressions, which include plus, minus, and times on integers
-- Control flow, which provides for booleans, less than, and, or, not, if statements, and while loops
+- Minijava arithmetic expressions, which include plus, minus, and times on integers.
+- Control flow, which provides for booleans, less than, and, or, not, if statements, and while loops.
 - Types: integers, arrays (of ints), booleans, and classes. The main class has a public static void primary method, but every other method must return an integer or an object.
 - Objects: Minijava objects can have fields and methods. The methods must return a value and can take parameters and contain their own local variables.
 - Dynamic dispatching: classes can extend other classes and override methods. Methods that override other methods must have the same parameters and must return the same type or a subclass of the original return type.
+
+## What We Wrote 
+
+While I am not at liberty to share the code itself, here is a summary of what we wrote for each part of the compiler.
+
+### JFlex Scanner
+- Defined token rules for MiniJava keywords, identifiers, integer literals, operators, delimiters, and comments/whitespace.
+- Routed lexical errors to readable compiler errors instead of failing silently.
+- Tracked source locations (row/column) so later stages could report precise error positions.
+
+### Java CUP Parser Grammar
+- Wrote grammar productions for classes, methods, statements, expressions, arrays, and inheritance-related syntax.
+- Added precedence/associativity declarations for operators (for example, arithmetic and boolean operators) so expressions parse as intended.
+- Tailor the grammar to avoid shift/reduce conflicts and reduce ambiguity, especially in expression parsing.
+- Used CUP semantic actions to construct AST nodes during parsing.
+
+### AST Node Hierarchy
+- Implemented node classes representing programs, classes, methods, variable declarations, statements (if/while/assign/print), and expressions (math, boolean, method calls, field access, array operations, object creation, etc.).
+- Stored source metadata (line/column) in nodes to improve semantic and runtime error diagnostics.
+
+### Visitor Pattern Compiler Passes
+- Used visitor interfaces and concrete visitor implementations to traverse AST nodes without embedding every pass directly in node classes.
+- Kept the pipeline separated by responsibility: symbol/type analysis visitors, checking/validation visitors, and code generation visitors.
+- This made it easier to add features (like garbage collection hooks and null checks) without rewriting the entire AST structure.
+
+### Semantic Analysis Infrastructure
+- Built and checked class/method/field environments and scope-aware variable lookup.
+- Enforced MiniJava type rules, including inheritance-aware method overriding and subtype-compatible returns.
+- Validated method calls, assignments, control-flow conditions, and array usage.
+
+### Code Generation and Runtime
+
+- Emitted x86-64 assembly for expressions, control flow, object allocation, method dispatch (vtable-based), and arrays.
+- Added runtime checks (including null dereference checks in key dereference paths).
+- Integrated generated code with `boot.c` and custom garbage-collector support routines (`mark`/`sweep`) through direct calls from emitted assembly.
 
 ## Testing overview
 
@@ -61,9 +99,12 @@ All of the above procedures are bundled with boot.c. During runtime, the compile
 
 ## Other Features
 
-To support richer debugging and error handling, we also stored additional information within our AST nodes: the row and column that the node starts at. This is especially evident during semantic passes, where we use a helper function to provide a consistent template for generating errors that includes the error location. 
-	We added some checks for null pointer dereferencing. When we allocate space for an object, we use the mjcalloc function given to us, which sets the memory at the specified location to 0. When we dereference a pointer, we check whether it is 0, because that indicates an object that was declared but not initialized.
-	We tried to set up the CSE Virtual Image but ran into some issues, so we decided to transfer our compiled code to attu to test. We wrote and used the handy-dandy build-and-transfer script that compiles, builds, and transfers the output file to attu (under Violet’s account), and we had attu open in a second terminal to run the output there. 
+To support richer debugging and error handling, we also stored additional information within our AST nodes: the row and column that the node starts at. This is especially evident during semantic passes, where we use a helper function to provide a consistent template for generating errors that includes the error location.
+
+We added some checks for null pointer dereferencing. When we allocate space for an object, we use the mjcalloc function given to us, which sets the memory at the specified location to 0. When we dereference a pointer, we check whether it is 0, because that indicates an object that was declared but not initialized.
+
+We tried to set up the CSE Virtual Image but ran into some issues, so we decided to transfer our compiled code to attu to test. We wrote and used the handy-dandy build-and-transfer script that compiles, builds, and transfers the output file to attu (under Violet’s account), and we had attu open in a second terminal to run the output there. 
+
 We wanted to add support for arrays of objects, not just ints, but we didn’t quite get to that. However, some places use arrays where we tried to avoid hardcoding int type in, so that in the future we could add support for other types. One example of this is our ArrayType class in ADT/Types for our semantics part of the project: a field stores elementType, and we could use that for other element types besides integers. 
 
 ## Work Was Indeed Divided
