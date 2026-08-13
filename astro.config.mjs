@@ -23,8 +23,14 @@ export default defineConfig({
     }
   },
   markdown: {
-    syntaxHighlight: "prism",
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex]
+    rehypePlugins: [rehypeKatex],
+    syntaxHighlight: {
+      type: 'shiki',
+      excludeLangs: []
+    },
+    shikiConfig: {
+      theme: 'github-light',
+    }
   }
 });
