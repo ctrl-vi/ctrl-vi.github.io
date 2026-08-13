@@ -27,7 +27,7 @@ As students in CSE 401 (Compilers) at UW, we were tasked with creating a compile
 ## Minijava Compiler Features
 
 Our code includes functionality for the MiniJava building blocks. We have functionality for:
-- Minijava arithmetic expressions, which include plus, minus, and times on integers.
+- Minijava arithmetic expressions, which include+, -, and * on integers.
 - Control flow, which provides for booleans, less than, and, or, not, if statements, and while loops.
 - Types: integers, arrays (of ints), booleans, and classes. The main class has a public static void primary method, but every other method must return an integer or an object.
 - Objects: Minijava objects can have fields and methods. The methods must return a value and can take parameters and contain their own local variables.
@@ -118,3 +118,5 @@ We had a lot of fun with this project, although at times it was frustrating :) I
 The overall freedom in the project was intimidating but really allowed us to make large-scale choices about software architecture and to implement proper object-oriented programming conventions. 
 
 As we mentioned before, the next thing we would like to add is support for arrays of objects that aren’t ints. That kind of change would require rewriting a little bit of every section of the code from scanning/parsing to codegen, and we didn’t get to it.
+
+I am not at liberty to share the code itself, but if you are interested in seeing the code, please reach out to me and I can provide it to you. :D

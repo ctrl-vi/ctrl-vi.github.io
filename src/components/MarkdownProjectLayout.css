@@ -36,7 +36,7 @@ lite-youtube {
 pre, .md-slot pre, .katex-display {
     overflow-x: auto;
     width: 100%;
-    background: #f8f8fa;
+    background: white;
     border-radius: 0.5em;
     padding: 1em;
     box-sizing: border-box;
