@@ -1,23 +1,21 @@
 ---
 article:
-    publishedTime: "2026-06-30T00:00:00-07:00"
-    modifiedTime: "2026-09-11T00:00:00-07:00"
+    publishedTime: "2026-09-11T01:34:42-07:00"
+    modifiedTime: "2026-09-11T01:34:42-07:00"
     authors: ["Violet Monserate"]
-    section: Class Projects
+    section: "Class Projects"
     tags: ["verilog", "vhdl", "fpga", "embedded"]
 layout: '@components/MarkdownProjectLayout.astro'
-title: FPGA Music Editor
-description: Designing an FPGA music editor with a rendering engine, VGA buffer, and audio pipeline for EE/CSE 371.
-seoDescription: Violet Monserate's EE/CSE 371 FPGA music editor project, covering a rendering engine, VGA buffer, ADSR envelope, audio generator, and audio controller.
+title: "FPGA Music Editor"
+description: "Designing an FPGA music editor with a rendering engine, VGA buffer, and audio pipeline for EE/CSE 371."
+seoDescription: "Violet Monserate's EE/CSE 371 FPGA music editor project, covering a rendering engine, VGA buffer, ADSR envelope, audio generator, and audio controller."
 image:
-    src: "@assets/fpga-music/thumbnail.png"
-    alt: "FPGA music editor Lab 6 thumbnail"
-startDate: '2026-06'
-finishDate: '2026-06'
+    src: "@assets/fpga-music/fpga-music-editor-thumbnail.png"
+    alt: "Placeholder thumbnail for the FPGA music editor project"
+startDate: "2026-06"
+finishDate: "2026-06"
 icons: ["verilog"]
 ---
-
-Lab 6 Report
 
 ## Design Procedure
 
