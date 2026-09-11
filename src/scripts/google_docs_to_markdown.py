@@ -33,7 +33,7 @@ BLOCK_TAGS = {
 
 def inline_markdown(value: str) -> str:
     value = re.sub(r"\s+", " ", value)
-    return re.sub(r"([\\`*_\[\]])", r"\\\1", value)
+    return value.replace("`", "\\`")
 
 
 class GoogleDocsParser(HTMLParser):
@@ -46,6 +46,7 @@ class GoogleDocsParser(HTMLParser):
         self.list_stack: list[str] = []
         self.link: str | None = None
         self.code_kind: str | None = None
+        self.emphasis_depth = 0
         self.ignored_depth = 0
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
@@ -73,6 +74,8 @@ class GoogleDocsParser(HTMLParser):
                 self.code_kind = "block"
             elif "c2" in classes:
                 self.code_kind = "inline"
+            if "c10" in classes:
+                self.emphasis_depth += 1
             return
         if tag == "a" and self.current is not None:
             href = attributes.get("href")
@@ -101,6 +104,8 @@ class GoogleDocsParser(HTMLParser):
             return
         if tag == "span":
             self.code_kind = None
+            if self.emphasis_depth:
+                self.emphasis_depth -= 1
             return
         if tag == "li":
             self.finish_block()
@@ -133,16 +138,26 @@ class GoogleDocsParser(HTMLParser):
         if self.link:
             self.current["parts"].append(f"[{text}]({self.link})")
         else:
-            self.current["parts"].append(text)
+            self.current["parts"].append(
+                {"kind": "emphasis", "text": text}
+                if self.emphasis_depth
+                else text
+            )
 
     def finish_block(self) -> None:
         if not self.current:
             return
         parts = self.current["parts"]
         if parts:
+            kind = self.current["kind"]
+            if kind == "p" and any(
+                isinstance(part, dict) and part.get("kind") == "emphasis"
+                for part in parts
+            ):
+                kind = "caption"
             self.blocks.append(
                 {
-                    "kind": self.current["kind"],
+                    "kind": kind,
                     "level": self.current.get("level", 0),
                     "parts": parts,
                 }
@@ -158,6 +173,47 @@ def source_image_path(source: str, input_path: Path) -> Path:
 def render_block(block: dict[str, object], image_map: dict[str, str]) -> str:
     kind = block["kind"]
     parts = block["parts"]
+
+    if kind == "caption":
+        image_parts: list[str] = []
+        caption_parts: list[str] = []
+        for part in parts:
+            if isinstance(part, dict) and part.get("kind") == "image":
+                source = str(part["source"])
+                alt = str(part["alt"])
+                image_parts.append(f"![{alt}]({image_map[source]})")
+            elif isinstance(part, dict) and part.get("kind") == "code-inline":
+                caption_parts.append(f"`{part['text']}{{:system-verilog}}`")
+            elif isinstance(part, dict) and part.get("kind") == "emphasis":
+                caption_parts.append(str(part["text"]))
+            else:
+                caption_parts.append(str(part))
+        caption = re.sub(r" +", " ", "".join(caption_parts)).strip()
+        if image_parts:
+            figure = "".join(image_parts)
+            return f"{figure}\n*{caption}*" if caption else figure
+        return f"*{caption}*" if caption else ""
+
+    if str(kind).startswith("h"):
+        heading_parts: list[str] = []
+        image_parts: list[str] = []
+        for part in parts:
+            if isinstance(part, dict) and part.get("kind") == "image":
+                source = str(part["source"])
+                alt = str(part["alt"])
+                image_parts.append(f"![{alt}]({image_map[source]})")
+            elif isinstance(part, dict) and part.get("kind") == "code-inline":
+                heading_parts.append(f"`{part['text']}{{:system-verilog}}`")
+            elif isinstance(part, dict) and part.get("kind") == "emphasis":
+                heading_parts.append(str(part["text"]))
+            else:
+                heading_parts.append(str(part))
+        heading = re.sub(r" +", " ", "".join(heading_parts)).strip()
+        level = min(6, int(str(kind)[1:]) + 1)
+        lines = [f"{'#' * level} {heading}"] if heading else []
+        lines.extend(image_parts)
+        return "\n".join(lines)
+
     rendered: list[str] = []
     for part in parts:
         if isinstance(part, dict) and part.get("kind") == "image":
@@ -168,20 +224,21 @@ def render_block(block: dict[str, object], image_map: dict[str, str]) -> str:
             rendered.append(f"`{part['text']}{{:system-verilog}}`")
         elif isinstance(part, dict) and part.get("kind") == "code-block":
             rendered.append(str(part["text"]).replace("\xa0", " "))
+        elif isinstance(part, dict) and part.get("kind") == "emphasis":
+            rendered.append(str(part["text"]))
         else:
             rendered.append(str(part))
     content = "".join(rendered)
     if not content:
         return ""
-    if str(kind).startswith("h"):
-        level = min(6, int(str(kind)[1:]) + 1)
-        return f"{'#' * level} {content}"
     if any(
         isinstance(part, dict) and part.get("kind") == "code-block"
         for part in parts
     ):
         return f"```system-verilog\n{content.strip()}\n```"
     content = re.sub(r" +", " ", content).strip()
+    if kind == "caption":
+        return f"*{content}*"
     if kind == "li":
         indent = "  " * max(0, int(block["level"]) - 1)
         return f"{indent}- {content}"
@@ -208,6 +265,14 @@ def merge_code_blocks(blocks: list[dict[str, object]]) -> list[dict[str, object]
         else:
             merged.append(block)
     return merged
+
+
+def is_figure_block(block: dict[str, object]) -> bool:
+    return any(
+        isinstance(part, dict)
+        and part.get("kind") in {"image", "code-block"}
+        for part in block["parts"]
+    )
 
 
 def create_thumbnail(source: Path, destination: Path) -> None:
@@ -297,12 +362,18 @@ def convert(
 
     body: list[str] = []
     previous_kind = ""
-    for block in parser.blocks:
+    for index, block in enumerate(parser.blocks):
         line = render_block(block, image_map)
         if not line:
             continue
         kind = str(block["kind"])
-        if body and (kind != "li" or previous_kind != "li"):
+        previous_block = parser.blocks[index - 1] if index else None
+        keep_figure_together = (
+            kind == "caption"
+            and previous_block is not None
+            and is_figure_block(previous_block)
+        )
+        if body and (kind != "li" or previous_kind != "li") and not keep_figure_together:
             body.append("")
         body.append(line)
         previous_kind = kind
