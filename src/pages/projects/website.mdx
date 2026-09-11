@@ -55,7 +55,9 @@ If you are curious about how the code turned out, you can view the [grid compone
 
 To REALLY simplify the process of presenting all of the different projects I have my hands in, I created a .md layout file that not only maintains the general design and style of the entire website (with the same navigation, footer, and header), but also easily interfaces with SEO utilities, OpenGraph protocol, and more. The important information that would be used by cards or SEO utilities is included in the frontmatter in a very straightforward format that I can fill out without worrying about properly formatting HTML. 
 
-More recently, I was trying to utilize $\LaTeX$ to show some equations, and that led to `KaTeX`, which renders math. By using another library, `remark-math`, I am simply able to write beautiful equations like 
+#### LaTeX
+
+I was trying to utilize $\LaTeX$ to show some equations, and that led to `KaTeX`, which renders math. By using another library, `remark-math`, I am simply able to write beautiful equations like 
 
 $$
 \int_{0}^{\infty} \left( \sum_{n=1}^{\infty} \frac{\alpha_n}{n^2 + \beta^2} \right) \cdot \sqrt{\frac{\pi}{2}} \, dx = \lim_{x \to \infty} \left[ e^{-\gamma x^2} + \frac{\delta}{x^2} \right] + \text{constant}
@@ -72,6 +74,38 @@ $$
 Or for inline things like $\Tau$, $\Beta$, or $\Kappa$, we do `$\Tau${:latex}`, `$\Beta${:latex}`, or `$\Kappa${:latex}`.
 
 You can look at the [markdown layout component itself here](https://github.com/ctrl-vi/ctrl-vi.github.io/blob/main/src/components/MarkdownProjectLayout.astro).
+
+#### Google Docs to Markdown
+
+Much of my classwork already begins as a carefully written report in Google Docs. While it is a good environment for drafting, collaborating, and submitting assignments, the exported HTML is not a good format for this personal website (being a far different style). It includes generated classes, inline pixel dimensions, document-specific page layout, and presentation details that only make sense inside the original document. Copying that HTML directly into my website would make the page inherit the appearance of a school report, which isn't exactly desireable.
+
+I wanted a workflow where I could finish a report in Google Docs and then transfer that work to the website without rewriting the entire document by hand. The result is the `google_docs_to_markdown.py` translator. It takes the HTML export from Google Docs as input and produces a normal project Markdown file, such as `fpga-music.md`, together with the image assets needed by Astro. The converter is intentionally a translator rather than a browser-like HTML renderer; it keeps the content and useful structure while discarding the Google Docs-specific presentation layer.
+
+The conversion process performs several jobs:
+
+1. It parses the exported HTML structurally, identifying paragraphs, headings, lists, links, code, and images instead of relying on fragile string replacements.
+2. It converts the document hierarchy into the site's Markdown hierarchy. The page title is supplied by the project frontmatter, so report headings begin at `##` rather than competing with the page's `#` title.
+3. It recognizes Google Docs' generated styling classes for technical content. Inline green code becomes annotated Markdown such as `` `asset_t{:system-verilog}`{:md}``, while consecutive code lines become a single fenced `system-verilog{:md}` block for Shiki syntax highlighting.
+4. It turns italicized Google Docs figure descriptions into the image-caption convention used throughout the site: an image followed by an italicized caption. Images are kept outside the asterisks so the caption styling does not accidentally italicize the image itself.
+5. It copies referenced images into a project-specific Astro asset directory and creates a blank 1920x1080 `fpga-music-editor-thumbnail.png` placeholder in the generated frontmatter. I can then replace that file with a custom Canva design without having the converter make creative decisions about the project's visual identity.
+6. It generates the frontmatter needed by the project collection, including authors, dates, tags, descriptions, the hero image, and the technologies displayed on the project card.
+
+The result is deliberately different from the Google Docs source. The report keeps its technical explanations, figures, code, and testing evidence, but the website supplies its own typography, spacing, navigation, responsive image sizing, figure captions, syntax highlighting, metadata, and overall visual identity. A class report can therefore remain recognizable as my work while feeling like part of the same portfolio as my software, robotics, and hardware projects.
+
+The converter also leaves room for judgment. Google Docs exports do not reliably provide useful alternative text for diagrams, and they cannot know which image makes the best project thumbnail. The script marks missing image descriptions for review and creates a stable 1920x1080 placeholder for a manually designed thumbnail, while I make the final decisions about accessibility text, captions, metadata, and what should be public. This keeps the repetitive transfer work automated without pretending that document structure can replace editorial or accessibility review.
+
+The converter is also reusable beyond this particular FPGA project. Its `--help` command documents options for changing the project title, code language, authors, dates, descriptions, tags, card icons, section, thumbnail filename, and source metadata behavior. The `input` argument is the Google Docs HTML export, the `output` argument is the Markdown or MDX file to generate, and `--assets` names the directory where the report's images and thumbnail placeholder should be copied. For example:
+
+```bash
+python3 src/scripts/google_docs_to_markdown.py report.html \
+    src/pages/projects/report.md \
+    --assets src/assets/report \
+    --language python \
+    --title "Course Report"
+```
+
+By default, everything before the first document heading is discarded. This removes names, student IDs, course labels, and dates that Google Docs commonly places at the top of a report. `--keep-preamble` preserves that material when it is meaningful, and `--remove-text` can remove additional known metadata paragraphs. Published and modified timestamps are generated from the system clock at conversion time, while the project start and finish dates remain explicit options because they describe when the work happened rather than when the website file was created. The output path and asset directory are supplied separately, so each report can become its own project entry.
+
 
 ### Embedded Youtube Videos
 
