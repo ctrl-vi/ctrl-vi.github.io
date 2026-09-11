@@ -1,7 +1,7 @@
 ---
 article: 
     publishedTime: "2025-06-19T02:07:41-08:00"
-    modifiedTime: "2025-06-19T02:07:41-08:00"
+    modifiedTime: "2026-09-10T23:25:09-07:00"
     authors: ["Violet Monserate", "Katherine Leavitt"]
     section: Class Projects
     tags: ["java", "c", "assembly", "gitlab"]
@@ -27,9 +27,10 @@ As students in CSE 401 (Compilers) at UW, we were tasked with creating a compile
 ## Minijava Compiler Features
 
 Our code includes functionality for the MiniJava building blocks. We have functionality for:
-- Minijava arithmetic expressions, which include+, -, and * on integers.
+
+- Minijava arithmetic expressions, which include `+{:java}`, `-{:java}`, and `*{:java}` on integers.
 - Control flow, which provides for booleans, less than, and, or, not, if statements, and while loops.
-- Types: integers, arrays (of ints), booleans, and classes. The main class has a public static void primary method, but every other method must return an integer or an object.
+- Types: integers, arrays (only of of type `int{:java}`), `boolean{:java}`, and `class{:java}`. The main class has a public static void primary method, but every other method must return an integer or an object.
 - Objects: Minijava objects can have fields and methods. The methods must return a value and can take parameters and contain their own local variables.
 - Dynamic dispatching: classes can extend other classes and override methods. Methods that override other methods must have the same parameters and must return the same type or a subclass of the original return type.
 
@@ -44,7 +45,7 @@ While I am not at liberty to share the code itself, here is a summary of what we
 
 ### Java CUP Parser Grammar
 - Wrote grammar productions for classes, methods, statements, expressions, arrays, and inheritance-related syntax.
-- Added precedence/associativity declarations for operators (for example, arithmetic and boolean operators) so expressions parse as intended.
+- Added precedence/associativity declarations for operators (i.e. arithmetic and boolean operators) so expressions parse as intended.
 - Tailor the grammar to avoid shift/reduce conflicts and reduce ambiguity, especially in expression parsing.
 - Used CUP semantic actions to construct AST nodes during parsing.
 
@@ -66,7 +67,7 @@ While I am not at liberty to share the code itself, here is a summary of what we
 
 - Emitted x86-64 assembly for expressions, control flow, object allocation, method dispatch (vtable-based), and arrays.
 - Added runtime checks (including null dereference checks in key dereference paths).
-- Integrated generated code with `boot.c` and custom garbage-collector support routines (`mark`/`sweep`) through direct calls from emitted assembly.
+- Integrated generated code with `boot.c{:c}` and custom garbage-collector support routines (`mark(){:c}`/`sweep(){:c}`) through direct calls from emitted assembly.
 
 ## Testing overview
 
@@ -95,7 +96,7 @@ In the case of the program terminating (whether by runtime error or exiting norm
 
 Note that this does decrease the speed of the final program, because we implemented a stop-the-world, blocking the program during the marking and sweeping processes so that no new objects are created, changing the state of the the roots list or the allocated objects lists.
 
-All of the above procedures are bundled with boot.c. During runtime, the compiled program itself maintains the underlying data structure and then calls the “mark” and “sweep” procedures as necessary with a standard “callq” instruction.
+All of the above procedures are bundled with `boot.c{:c}`. During runtime, the compiled program itself maintains the underlying data structure and then calls the `mark{:c}` and `sweep{:c}` procedures as necessary with a standard `callq` instruction.
 
 ## Other Features
 
