@@ -4,10 +4,10 @@ import partytown from '@astrojs/partytown';
 import { unified } from "@astrojs/markdown-remark";
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
-import remarkInline from '@plugins/inline-code';
 import { fileURLToPath } from 'node:url';
 
 import mdx from '@astrojs/mdx';
+import rehypeShiki from '@shikijs/rehype';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,8 +15,15 @@ export default defineConfig({
   integrations: [
     partytown(),
     mdx({
-      remarkPlugins: [remarkInline, remarkMath],
-      rehypePlugins: [rehypeKatex],
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [
+        rehypeKatex,
+        [rehypeShiki,
+        {
+          theme: 'github-light',
+          inline: 'tailing-curly-colon'
+        }]
+      ],
     }),
   ],
   vite: {
@@ -32,16 +39,17 @@ export default defineConfig({
     }
   },
   markdown: {
+    syntaxHighlight: false,
     processor: unified({
-      remarkPlugins: [remarkInline, remarkMath],
-      rehypePlugins: [rehypeKatex],
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [ 
+        [rehypeShiki,
+        {
+          theme: 'github-light',
+          inline: 'tailing-curly-colon'
+        }],
+        rehypeKatex,
+      ],
     }),
-    syntaxHighlight: {
-      type: 'shiki',
-      excludeLangs: []
-    },
-    shikiConfig: {
-      theme: 'github-light',
-    }
   }
 });
