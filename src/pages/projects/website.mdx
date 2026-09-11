@@ -55,11 +55,31 @@ If you are curious about how the code turned out, you can view the [grid compone
 
 To REALLY simplify the process of presenting all of the different projects I have my hands in, I created a .md layout file that not only maintains the general design and style of the entire website (with the same navigation, footer, and header), but also easily interfaces with SEO utilities, OpenGraph protocol, and more. The important information that would be used by cards or SEO utilities is included in the frontmatter in a very straightforward format that I can fill out without worrying about properly formatting HTML. 
 
+#### LaTeX
+
+I was trying to utilize $\LaTeX$ to show some equations, and that led to `KaTeX`, which renders math. By using another library, `remark-math`, I am simply able to write beautiful equations like 
+
+$$
+\int_{0}^{\infty} \left( \sum_{n=1}^{\infty} \frac{\alpha_n}{n^2 + \beta^2} \right) \cdot \sqrt{\frac{\pi}{2}} \, dx = \lim_{x \to \infty} \left[ e^{-\gamma x^2} + \frac{\delta}{x^2} \right] + \text{constant}
+$$
+
+with some simple code, like so:
+
+```
+$$
+\int_{0}^{\infty} \left( \sum_{n=1}^{\infty} \frac{\alpha_n}{n^2 + \beta^2} \right) \cdot \sqrt{\frac{\pi}{2}} \, dx = \lim_{x \to \infty} \left[ e^{-\gamma x^2} + \frac{\delta}{x^2} \right] + \text{constant}
+$$
+```
+
+Or for inline things like $\Tau$, $\Beta$, or $\Kappa$, we do `$\Tau${:latex}`, `$\Beta${:latex}`, or `$\Kappa${:latex}`.
+
+You can look at the [markdown layout component itself here](https://github.com/ctrl-vi/ctrl-vi.github.io/blob/main/src/components/MarkdownProjectLayout.astro).
+
 #### Google Docs to Markdown
 
-One of the reasons I wanted this system was practical: much of my classwork already begins as a carefully written report in Google Docs. Google Docs is a good environment for drafting, collaborating, and submitting assignments, but the exported HTML is not a good format for a personal website. It includes generated classes, inline pixel dimensions, document-specific page layout, and presentation details that only make sense inside the original document. Copying that HTML directly into my website would make the page inherit the appearance of a school report instead of the visual language of this site.
+Much of my classwork already begins as a carefully written report in Google Docs. While it is a good environment for drafting, collaborating, and submitting assignments, the exported HTML is not a good format for this personal website (being a far different style). It includes generated classes, inline pixel dimensions, document-specific page layout, and presentation details that only make sense inside the original document. Copying that HTML directly into my website would make the page inherit the appearance of a school report, which isn't exactly desireable.
 
-I wanted a workflow where I could finish a report in Google Docs and then transfer that work to the website without rewriting the entire document by hand. The result is the `google_docs_to_markdown.py` translator. It takes the HTML export from Google Docs as input and produces a normal project Markdown file, such as `fpga-music.md`, together with the image assets needed by Astro. The converter is intentionally a translator rather than a browser-like HTML renderer: it keeps the content and useful structure while discarding the Google Docs-specific presentation layer.
+I wanted a workflow where I could finish a report in Google Docs and then transfer that work to the website without rewriting the entire document by hand. The result is the `google_docs_to_markdown.py` translator. It takes the HTML export from Google Docs as input and produces a normal project Markdown file, such as `fpga-music.md`, together with the image assets needed by Astro. The converter is intentionally a translator rather than a browser-like HTML renderer; it keeps the content and useful structure while discarding the Google Docs-specific presentation layer.
 
 The conversion process performs several jobs:
 
@@ -86,23 +106,6 @@ python3 src/scripts/google_docs_to_markdown.py report.html \
 
 By default, everything before the first document heading is discarded. This removes names, student IDs, course labels, and dates that Google Docs commonly places at the top of a report. `--keep-preamble` preserves that material when it is meaningful, and `--remove-text` can remove additional known metadata paragraphs. Published and modified timestamps are generated from the system clock at conversion time, while the project start and finish dates remain explicit options because they describe when the work happened rather than when the website file was created. The output path and asset directory are supplied separately, so each report can become its own project entry.
 
-More recently, I was trying to utilize $\LaTeX$ to show some equations, and that led to `KaTeX`, which renders math. By using another library, `remark-math`, I am simply able to write beautiful equations like 
-
-$$
-\int_{0}^{\infty} \left( \sum_{n=1}^{\infty} \frac{\alpha_n}{n^2 + \beta^2} \right) \cdot \sqrt{\frac{\pi}{2}} \, dx = \lim_{x \to \infty} \left[ e^{-\gamma x^2} + \frac{\delta}{x^2} \right] + \text{constant}
-$$
-
-with some simple code, like so:
-
-```
-$$
-\int_{0}^{\infty} \left( \sum_{n=1}^{\infty} \frac{\alpha_n}{n^2 + \beta^2} \right) \cdot \sqrt{\frac{\pi}{2}} \, dx = \lim_{x \to \infty} \left[ e^{-\gamma x^2} + \frac{\delta}{x^2} \right] + \text{constant}
-$$
-```
-
-Or for inline things like $\Tau$, $\Beta$, or $\Kappa$, we do `$\Tau${:latex}`, `$\Beta${:latex}`, or `$\Kappa${:latex}`.
-
-You can look at the [markdown layout component itself here](https://github.com/ctrl-vi/ctrl-vi.github.io/blob/main/src/components/MarkdownProjectLayout.astro).
 
 ### Embedded Youtube Videos
 
