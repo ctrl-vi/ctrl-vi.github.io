@@ -2,7 +2,7 @@
   "name": "ctrl-vi.github.io",
   "type": "module",
   "version": "0.0.1",
-  "packageManager": "pnpm@10.18.1+sha512.77a884a165cbba2d8d1c19e3b4880eee6d2fcabd0d879121e282196b80042351d5eb3ca0935fa599da1dc51265cc68816ad2bddd2a2de5ea9fdf92adbec7cd34",
+  "packageManager": "pnpm@11.22.0+sha512.1ff870c4c6133dfd88fb2afc46dd13d47f09c9794b438c6fdb47ca98caf3bc16381ee0be93a091b8e3824cf01f889f46d7d9e20910fb0be1ab0fb5baa80dd621",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -10,14 +10,16 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.6",
-    "@astrojs/partytown": "^2.1.4",
-    "astro": "^5.10.0",
-    "astro-embed": "^0.9.1",
-    "astro-seo": "^0.8.4",
+    "@astrojs/markdown-remark": "^7.2.2",
+    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/partytown": "^2.1.7",
+    "@shikijs/rehype": "^4.4.3",
+    "astro": "^7.2.1",
+    "astro-embed": "^0.13.1",
+    "astro-seo": "^1.1.0",
     "rehype-katex": "^7.0.1",
     "remark": "^15.0.1",
     "remark-math": "^6.0.0",
-    "sharp": "^0.34.2"
+    "sharp": "^0.35.3"
   }
 }
