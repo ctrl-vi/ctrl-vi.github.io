@@ -17,6 +17,10 @@ finishDate: "2026-06"
 icons: ["verilog"]
 ---
 
+import {YouTube} from 'astro-embed';
+ 
+<YouTube id="x1BGtNxDwJo" posterQuality="max" />
+
 ## Design Procedure
 
 In this lab, we engineered a digital synthesizer and music editor on the DE1-SoC by integrating direct digital synthesis (DDS) audio generation with a VGA rendering engine. The architecture relies on multidimensional memory fetching, algorithmic state machines, and data paths to generate concurrent audio voices and graphical user interfaces.
@@ -69,12 +73,13 @@ color_t framebuffer0 [76799:0];
 color_t framebuffer1 [76799:0];
 ...
 always_ff @(posedge clk50) begin
-        // Strictly synchronous reads from BOTH memories into physical registers
-        read_data0 <= framebuffer0[read_address];
-        read_data1 <= framebuffer1[read_address];
-    end
-    // Safely multiplex the registered outputs (NOT the memory itself)
-    assign pixel_read = active_buffer ? read_data1 : read_data0;
+    // Strictly synchronous reads from BOTH memories into physical registers
+    read_data0 <= framebuffer0[read_address];
+    read_data1 <= framebuffer1[read_address];
+end
+
+// Safely multiplex the registered outputs (NOT the memory itself)
+assign pixel_read = active_buffer ? read_data1 : read_data0;
 ```
 *Figure 2: Code featuring the changes made to ensure that memory would be utilized, saving the more general-purpose ones for other applications throughout the project.*
 
@@ -109,6 +114,7 @@ always_comb begin
         default:vga_rgb_out = BLACK_RGB;
     endcase
 end
+
 // Routing final decoded color to the DAC
 assign VGA_R = vga_rgb_out.r;
 assign VGA_G = vga_rgb_out.g;
@@ -339,7 +345,7 @@ Overall, the Rendering Engine consistently creates the requested asset. During T
 
 In this testbench, we verify the VGA_dual_buffer module by confirming its ability to route high-speed pixel writes to alternating memory blocks. The primary goal was to ensure absolute read/write isolation between the rendering engine and the physical VGA driver, proving that the foreground image remains perfectly stable. At the same time, the background frame is being actively composed.
 
-During the first testing phase, we observe the rendering engine scanning through the memory space and executing pixel writes exclusively to framebuffer 0. As the 1D memory array is populated, the resulting data forms a treble clef with radiating staff lines. Notably, the asset appears rotated 90 degrees in the memory viewer. This is an expected artifact of our 1D array flattening calculation (driver_x + (driver_y<<8) + (driver_y<<6)); because the engine's X/Y coordinate iteration (column-major) is transposed relative to the physical monitor's horizontal scanlines (row-major), the raw memory appears rotated. However, it maps perfectly to the correct upright orientations on the physical VGA hardware.
+During the first testing phase, we observe the rendering engine scanning through the memory space and executing pixel writes exclusively to framebuffer 0. As the 1D memory array is populated, the resulting data forms a treble clef with radiating staff lines. Notably, the asset appears rotated 90 degrees in the memory viewer. This is an expected artifact of our 1D array flattening calculation (`driver_x + (driver_y<<8) + (driver_y<<6));{:system-verilog}` because the engine's X/Y coordinate iteration (column-major) is transposed relative to the physical monitor's horizontal scanlines (row-major), the raw memory appears rotated. However, it maps perfectly to the correct upright orientations on the physical VGA hardware.
 
 In the subsequent testing phase, the swap signal is toggled, and we observe the rendering engine's write operations cleanly switch over to framebuffer 1. During this time interval, the engine modifies only the values in this alternate memory block, successfully encoding a 90-degree-rotated version of the whole-note asset. Crucially, the waveform proves that while framebuffer 1 is being actively manipulated by the rendering engine, the data in framebuffer 0 remains completely locked and undisturbed. This confirms our double-buffered architecture is flawless: the physical monitor can safely read the static treble clef from buffer 0 without any visual tearing, while the engine simultaneously composes the whole note out of sight in buffer 1.
 
@@ -984,7 +990,3 @@ This lab took approximately 93 hours, broken down as follows:
 - Testing & Simulation – 10 hours
 - Debugging – 6 hours
 - Producing writeup and video – 12 hours
-
-Mention the new disconnect between the VGA and the video_driver?
-
-All sections need short descriptions about the waveforms/output
