@@ -14,17 +14,7 @@ export default defineConfig({
   site: 'https://ctrl-vi.github.io',
   integrations: [
     partytown(),
-    mdx({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [
-        rehypeKatex,
-        [rehypeShiki,
-        {
-          theme: 'github-light',
-          inline: 'tailing-curly-colon'
-        }]
-      ],
-    }),
+    mdx(),
   ],
   vite: {
     resolve: {
