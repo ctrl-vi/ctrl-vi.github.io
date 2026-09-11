@@ -7,7 +7,7 @@ article:
     tags: ["verilog", "vhdl", "fpga", "embedded"]
 layout: '@components/MarkdownProjectLayout.astro'
 title: "FPGA Music Editor"
-description: "Designing an FPGA music editor with a rendering engine, VGA buffer, and audio pipeline for EE/CSE 371."
+description: "Designing an FPGA music editor with a rendering engine, VGA buffer, and audio pipeline for EE/CSE 371"
 seoDescription: "Violet Monserate's EE/CSE 371 FPGA music editor project, covering a rendering engine, VGA buffer, ADSR envelope, audio generator, and audio controller."
 image:
     src: "@assets/fpga-music/fpga-music-editor-thumbnail.png"
